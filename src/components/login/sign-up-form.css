@@ -1,0 +1,13 @@
+#signUpForm {
+    max-height: 500px;
+    overflow-y: scroll;
+}
+
+.required:after {
+    content: " *";
+    color: red;
+}
+
+.gender-choice {
+    margin-left: 1px;
+}
