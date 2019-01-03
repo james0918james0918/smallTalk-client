@@ -1,15 +1,15 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
-
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = {
     module: {
         rules: [
             {
-                test: /\.js$/,
+                test: /\.jsx?$/,
                 exclude: /node_modules/,
                 use: {
-                    loader: "babel-loader"
-                }
+                    loader: "babel-loader",
+                },
             },
             {
                 test: /\.html$/,
@@ -27,6 +27,20 @@ module.exports = {
                     },
                     {
                         loader: "css-loader"
+                    },
+                ]
+            },
+            {
+                test: /\.scss$/,
+                use:[
+                    {
+                        loader: MiniCssExtractPlugin.loader
+                    },
+                    {
+                        loader: "css-loader"
+                    },
+                    {
+                        loader: "sass-loader"
                     }
                 ]
             },
@@ -36,7 +50,7 @@ module.exports = {
                     loader: 'file-loader',
                     options: {}
                 }
-            }
+            },
         ]
     },
     plugins: [
@@ -49,6 +63,9 @@ module.exports = {
                 from: 'assets',
                 to: 'assets'
             }
-        ])
+        ]),
+        new MiniCssExtractPlugin({
+            filename: "[name].css", // compile to name according the target scss file
+        }),
     ]
 };
