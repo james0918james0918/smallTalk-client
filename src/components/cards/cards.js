@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Card from '../../common/card/card'
-
+import svgIcons from '../../common/svgIcons/svgIcons';
 class Cards extends Component{
    
     constructor(props){
@@ -9,8 +9,8 @@ class Cards extends Component{
     }
 
     createCards(){
-        const cards=this.props.textGroup.map( (item,index) => <Card title={item.title} description={item.description} key={index} />);
-        return cards;
+        // key attributes are required in an array of JSX elements 
+        return this.props.textGroup.map( (item,index) => <Card title={item.title} description={item.description} icon={svgIcons[index]} key={index} />);
     }
 
     render(){

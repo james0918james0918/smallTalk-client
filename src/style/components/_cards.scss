@@ -1,0 +1,39 @@
+.cards{
+    @include gridLayout($rowGap: 1.5rem );
+    padding: 4rem;
+    background-color: $color-grey-light;
+    &__cardsArea{
+        @include gridLayout($column: repeat(auto-fit,minmax(10rem,1fr)),$columnGap:2rem);
+    }
+}
+
+
+.customedCard{
+    @include gridLayout($row:1fr 4fr);
+    color:black;
+    &__titleBox{
+        @include flexLayout($align:center){
+            justify-content: center;
+        }
+    }
+    &__title{
+        font-size: 4rem;
+        align-self: center;
+        margin: 0 0;
+        text-align: center;
+        color:$color-green-dark;
+    }
+    &__description{
+        @include flexLayout($direction:column,$align:center); 
+        font-size:2.5rem;
+        padding:1rem;
+        &::before{
+            content: '';
+            height:3px;
+            width:20rem;
+            background-color: $color-green-dark;
+            transform: translateY(-1rem);
+        }         
+    }
+}
+

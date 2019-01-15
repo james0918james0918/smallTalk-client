@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import NavBar from '../components/navbar/navbar'
 import Landing from '../components/landing/landing'
-
+import Cards from '../'
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
     faEnvelope,

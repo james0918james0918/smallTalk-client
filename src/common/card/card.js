@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-
 class Card extends Component{
     constructor(props){
         super(props);
@@ -7,12 +6,12 @@ class Card extends Component{
 
     render(){
         return(
-            <div className="card">
-                <figure className="card__imgContainer">
-                    <img className="card__img"></img>
+            <div className="customedCard">
+                <figure className="customedCard__titleBox">
+                    {this.props.icon}
+                    <h4 className="customedCard__title">{this.props.title}</h4>
                 </figure>
-                <h4 className="card__title">{this.props.title}</h4>
-                <p className="card__description">
+                <p className="customedCard__description">
                     {this.props.description}
                 </p>
             </div>

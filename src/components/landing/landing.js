@@ -28,8 +28,8 @@ export default () => {
                                 title: "Never miss stuffs again!",
                                 description: "Promotion an ourselves up otherwise my. High what each snug rich far yet easy. In companions inhabiting mr principles at insensible do. Heard their sex hoped enjoy vexed child for. Prosperous so occasional assistance it discovered especially no. Provision of he residence"
                             }
-                        ]  
-            }/>
+                        ]}
+            />
         </React.Fragment>
     )
 }
