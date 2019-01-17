@@ -20,3 +20,11 @@
     $width: $width;
     @content;
 }
+
+@mixin horizontalLine($width,$color,$offset){
+    content: '';
+    height:3px;
+    width:$width;
+    background-color: $color;
+    transform: $offset;
+}

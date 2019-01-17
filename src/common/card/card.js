@@ -14,6 +14,7 @@ class Card extends Component{
                 <p className="customedCard__description">
                     {this.props.description}
                 </p>
+                <button className="customedCard__btn">Learn more</button>
             </div>
         )
     }

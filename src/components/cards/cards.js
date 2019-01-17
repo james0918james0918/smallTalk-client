@@ -16,7 +16,8 @@ class Cards extends Component{
     render(){
         return(
             <section className="cards">
-                <h1 className="title_h1">{this.props.headerText}</h1>
+                <h1 className="cards__header">{this.props.headerText}</h1>
+                <p className="cards__intro"> Manage the team in the way you can't even imagine. </p>
                 <div className="cards__cardsArea">
                     {this.createCards()}
                 </div>
