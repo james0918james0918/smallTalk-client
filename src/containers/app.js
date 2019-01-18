@@ -1,32 +1,12 @@
-import React, { Component } from 'react'
-import NavBar from '../components/navbar/navbar'
-import Landing from '../components/landing/landing'
-import Cards from '../'
-import { library } from '@fortawesome/fontawesome-svg-core';
-import {
-    faEnvelope,
-    faFileSignature,
-    faKey,
-    faMars,
-    faRedo,
-    faSignInAlt,
-    faSpinner,
-    faUser,
-    faUserPlus,
-    faVenus } from '@fortawesome/free-solid-svg-icons';
+import React, { Component } from 'react';
+import { BrowserRouter as Router} from 'react-router-dom';
+import Routes from '../routes';
+import NavBar from '../components/navbar/navbar';
+import Landing from '../components/landing/landing';
 
-library.add(
-    faEnvelope,
-    faFileSignature,
-    faKey,
-    faMars,
-    faRedo,
-    faSignInAlt,
-    faSpinner,
-    faUser,
-    faUserPlus,
-    faVenus
-)
+import addFontAwesomeIcons from '../common/font-awesome-icons/font-awesome-icons';
+
+addFontAwesomeIcons();
 
 class App extends Component {
     render() {
@@ -34,6 +14,11 @@ class App extends Component {
             <div className="app">
                 <NavBar />
                 <Landing />
+                <Router>
+                    <div>
+                        <Routes></Routes>
+                    </div>
+                </Router>
             </div>
         )
     }
