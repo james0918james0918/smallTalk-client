@@ -29,7 +29,8 @@ class LoginModal extends Component {
         this.state = {
             modal: this.props.modal,
             activeTab: this.props.activeTab,
-            formData: {
+            invalid: true,
+            formStates: {
                 firstName: null,
                 lastName: null,
                 email: null,
@@ -37,12 +38,13 @@ class LoginModal extends Component {
                 password: null,
                 confirmPassword: null,
                 gender: null,
-            }
+            },
         }
 
         this.toggle = this.toggle.bind(this);
         this.onTabClick = this.onTabClick.bind(this);
         this.onInputFieldsChange = this.onInputFieldsChange.bind(this);
+        this.formEnable=this.formEnable.bind(this);
         this.submit = this.submit.bind(this);
     }
 
@@ -76,34 +78,46 @@ class LoginModal extends Component {
         }
     }
 
-    onInputFieldsChange(e) {
+    formEnable(formValidBits){
+        // check if all bits are set
+        this.setState({ invalid: !Object.keys(formValidBits).every((bit)=> formValidBits[bit]) });
+    }
+
+    // Getting the form data
+    // only valid form data or null is given
+    onInputFieldsChange(fieldName,value) {
         // Use HTML's name property to identify the field changed
-        const { formData } = this.state
-        formData[e.target.name] = e.target.value;
-        this.setState({ formData });
+        const { formStates } = this.state
+        formStates[fieldName] = value;
+        this.setState({ formStates });
+        console.log(`the state in parent: ${this.state.formStates[fieldName]}`);
     }
 
     submit() {
         if (this.state.activeTab === LOGIN_MODAL_TABS.SIGN_IN) {
 
         } else {
-            // userService.create({
-            //     name: {
-            //         firstName: this.state.formData.firstName,
-            //         lastName: this.state.formData.lastName
-            //     },
-            //     username: this.state.formData.username,
-            //     password: this.state.formData.password,
-            //     email: this.state.formData.email
-            // }).then(() => console.log("Yee"));
+
+            //send the request to the server to ask the server to send the email
+            (async function(userInfo){
+                try{
+                    let res=await userService.sendEmail( userInfo );
+                    console.log(res);
+                }catch(e){
+                    console.log(`error: ${e}`);
+                }
+            })(this.state.formStates);
+        
+            // create database connection
             userService.create({
                 name: {
-                    firstName: "James",
-                    lastName: "Liu"
+                    firstName: this.state.formStates.firstName,
+                    lastName: this.state.formStates.lastName
                 },
-                username: "james0918",
-                password: "james0918",
-                email: "james0918james0918@hotmail.com"
+                username: this.state.formStates.username,
+                password: this.state.formStates.password,
+                email: this.state.formStates.email,
+                gender: this.state.formStates.gender,
             }).then(() => console.log("Yee"));
         }
     }
@@ -130,7 +144,8 @@ class LoginModal extends Component {
                         <TabContent activeTab={this.state.activeTab}>
                             <TabPane className="input-form" tabId={LOGIN_MODAL_TABS.SIGN_UP}>
                                 <SignUpForm onInputFieldsChange={ this.onInputFieldsChange }
-                                            formStates={this.state.formStates} />
+                                            formEnable={ this.formEnable }
+                                            formStates={ this.state.formStates }/>
                             </TabPane>
                             <TabPane className="input-form" tabId={LOGIN_MODAL_TABS.SIGN_IN}>
                                 <SignInForm onInputFieldsChange={ this.onInputFieldsChange } />
