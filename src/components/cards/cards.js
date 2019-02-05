@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import Card from '../../common/card/card'
 import svgIcons from '../../common/svgIcons/svgIcons';
+
 class Cards extends Component{
-   
     constructor(props){
         super(props);
         this.createCards.bind(this);

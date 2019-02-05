@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
-class Card extends Component{
-    constructor(props){
+
+class Card extends Component {
+    constructor(props) {
         super(props);
     }
 

@@ -16,7 +16,7 @@ export default ({
                 disabled={disabled || isLoading}
                 {...props}>
             {isLoading && <FontAwesomeIcon icon="spinner" spin /> }{' '}
-            {!isLoading ? text : loadingText}
+            {isLoading ? loadingText : text}
         </Button>
     )
 }

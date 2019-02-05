@@ -11,6 +11,21 @@ import {
 class SignInForm extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            username: this.props.formData.username,
+            password: this.props.formData.password
+        };
+
+        this.onInputFieldsChange.bind(this);
+    }
+
+    onInputFieldsChange(e) {
+        const { name, value } = event.target;
+        this.setState({
+            [name]: value
+        });
+        this.props.onInputFieldsChange(e);
     }
 
     render() {

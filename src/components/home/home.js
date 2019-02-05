@@ -8,7 +8,10 @@ class Home extends Component {
     render() {
         return (
             <div>
+                <p>For testing</p>
             </div>
         )
     }
 }
+
+export default Home;

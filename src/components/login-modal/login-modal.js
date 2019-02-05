@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import classnames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import UserService from '../../services/user-service';
+import { AuthService, UserService } from '../../services';
 
 import SignInForm from './sign-in-form/sign-in-form';
 import SignUpForm from './sign-up-form/sign-up-form';
@@ -22,6 +22,7 @@ import LoaderButton from '../../common/loader-button/loader-button';
 import './login-modal.css';
 
 let userService = new UserService();
+let authService = new AuthService();
 
 class LoginModal extends Component {
     constructor(props) {
@@ -94,8 +95,14 @@ class LoginModal extends Component {
     }
 
     submit() {
+        this.setState()
         if (this.state.activeTab === LOGIN_MODAL_TABS.SIGN_IN) {
-
+            this.setState({ isLoading: true });
+            authService.logIn(this.state.formData.username, this.state.formData.password)
+                .then(() => {
+                    this.setState({ isLoading: false });
+                    this.props.history.push('/');
+                });
         } else {
 
             //send the request to the server to ask the server to send the email
@@ -148,7 +155,8 @@ class LoginModal extends Component {
                                             formStates={ this.state.formStates }/>
                             </TabPane>
                             <TabPane className="input-form" tabId={LOGIN_MODAL_TABS.SIGN_IN}>
-                                <SignInForm onInputFieldsChange={ this.onInputFieldsChange } />
+                                <SignInForm onInputFieldsChange={ this.onInputFieldsChange }
+                                            formData={this.state.formData} />
                             </TabPane>
                         </TabContent>
                     </ModalBody>
@@ -157,7 +165,7 @@ class LoginModal extends Component {
                                       disabled={this.state.invalid}
                                       onClick={this.submit}
                                       type="submit"
-                                      isLoading={false}
+                                      isLoading={this.state.isLoading}
                                       text="Submit"
                                       loadingText="Logging In" />
                         <Button color="secondary" onClick={this.toggle}>Cancel</Button>

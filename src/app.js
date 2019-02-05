@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router} from 'react-router-dom';
-import Routes from '../routes';
-import NavBar from '../components/navbar/navbar';
-import Landing from '../components/landing/landing';
+import Routes from './routes';
+import NavBar from './components/navbar/navbar';
 
-import addFontAwesomeIcons from '../common/font-awesome-icons/font-awesome-icons';
+import addFontAwesomeIcons from './common/font-awesome-icons/font-awesome-icons';
 
 addFontAwesomeIcons();
 
@@ -13,11 +12,8 @@ class App extends Component {
         return (
             <div className="app">
                 <NavBar />
-                <Landing />
                 <Router>
-                    <div>
-                        <Routes></Routes>
-                    </div>
+                    <Routes />
                 </Router>
             </div>
         )

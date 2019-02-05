@@ -1,5 +1,6 @@
-import React from 'react'
-import Cards from '../cards/cards'
+import React from 'react';
+import Cards from '../cards/cards';
+import { INTRO_CONTENTS } from '../../constants/intro-contents';
 import './landing.css';
 
 export default () => {

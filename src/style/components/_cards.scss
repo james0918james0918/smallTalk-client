@@ -23,7 +23,6 @@
         @include gridLayout($column: repeat(auto-fit,minmax(10rem,1fr)),$columnGap:2rem);
         grid-column: 2/3;
     }
-
 }
 
 

@@ -1,17 +1,17 @@
-import BaseClass from './base-service';
+import BaseService from './base-service';
 import axios from 'axios';
 
-class AuthService extends BaseClass {
-    signIn(username, password) {
-        axios.post(this.base_url + '/sign-in', {
+export class AuthService extends BaseService {
+    logIn(username, password) {
+        return axios.post(this.base_url + "/authentication/login", {
             username: username,
             password: password
-        }).then()
+        }).then(response => {
+            localStorage.setItem("user", JSON.stringify(response.data.user));
+        });
     }
 
-    signOut() {
-        localStorage.removeItem('user');
+    logOut() {
+        localStorage.removeItem("user");
     }
-}
-
-export default AuthService;
+};

@@ -9,7 +9,7 @@ import {
     NavbarToggler,
     NavItem,
     NavLink } from 'reactstrap';
-import LoginModal from '../login/login-modal';
+import LoginModal from '../login-modal/login-modal';
 import { LOGIN_MODAL_TABS } from '../../constants/login';
 
 class NavBar extends Component {
@@ -43,7 +43,7 @@ class NavBar extends Component {
         return (
             <div>
                 <Navbar color="transparent" expand="md" id="navBar" fixed="top">
-                    <NavbarBrand id="navBarBrand">Lord</NavbarBrand>
+                    <NavbarBrand id="navBarBrand">SmallTalk</NavbarBrand>
                     <NavbarToggler onClick={this.toggle} id="navBarToggler" />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" id="navBarNav" navbar>

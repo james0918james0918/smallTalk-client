@@ -11,7 +11,7 @@ import {
     faUserPlus,
     faVenus } from '@fortawesome/free-solid-svg-icons';
 
-export const addFontAwesomeIcons = () => {
+const addFontAwesomeIcons = () => (
     library.add(
         faEnvelope,
         faFileSignature,
@@ -24,4 +24,6 @@ export const addFontAwesomeIcons = () => {
         faUserPlus,
         faVenus
     )
-}
+)
+
+export default addFontAwesomeIcons;
