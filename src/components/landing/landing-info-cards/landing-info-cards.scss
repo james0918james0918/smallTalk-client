@@ -1,3 +1,6 @@
+@import "../../../styles/abstract/mixins.scss";
+@import "../../../styles/abstract/variables.scss";
+
 .cards{
     @include gridLayout($column:minmax(3rem,5%) 80% minmax(3rem,5%),$rowGap: 7rem ){
         justify-items: center;
@@ -5,14 +8,14 @@
     };
     padding:5rem;
     background-color: $color-grey-light;
-    &__header{ 
+    &__header{
         @include flexLayout($direction:column,$align:center);
         font-size: 5rem;
         color: $color-green-moredark;
         grid-column: 2/3;
         &::after{
             @include horizontalLine(16rem,$color-green-moredark,translateY(4rem));
-        }     
+        }
     }
     &__intro{
         font-size:2rem;
@@ -46,12 +49,12 @@
         color:$color-green-dark;
     }
     &__description{
-        @include flexLayout($direction:column,$align:center); 
+        @include flexLayout($direction:column,$align:center);
         font-size:2rem;
         padding:1rem;
         &::before{
             @include horizontalLine(16rem,$color-green-dark,translateY(-2rem));
-        }         
+        }
     }
     &__btn{
         display: inline-block;

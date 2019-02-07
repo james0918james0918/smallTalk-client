@@ -1,36 +1,67 @@
-import React from 'react';
-import Cards from '../cards/cards';
-import { INTRO_CONTENTS } from '../../constants/intro-contents';
-import './landing.css';
+import React, { Component } from 'react';
+import LandingInfoCards from './landing-info-cards/landing-info-cards';
+import LandingModal from './landing-modal/landing-modal';
+import { INTRO_CONTENTS, LOGIN_MODAL_TABS } from '../../constants/index';
+import './landing.scss';
 
-export default () => {
+class Landing extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isOpen: false,
+      modal: false,
+      signUpOrSignIn: null
+    };
+
+    this.toggle = this.toggle.bind(this);
+    this.onModalChange = this.onModalChange.bind(this);
+  }
+
+  toggle() {
+    this.setState({
+      isOpen: !this.state.isOpen
+    });
+  }
+
+  onModalChange(modalState, signUpOrSignIn) {
+    this.setState({
+      modal: modalState,
+      signUpOrSignIn
+    });
+  }
+
+  render() {
     return (
-        <React.Fragment>
-            <div className="masthead">
-                <div className="container d-flex h-100 align-items-center">
-                    <div className="mx-auto text-center">
-                        <h1 className="mx-auto my-0 text-uppercase">SmallTalk</h1>
-                        <h2 className="text-white-50 mx-auto mt-2 mb-5">Manage Team Like a Country</h2>
-                    </div>
-                </div>
+      <React.Fragment>
+        <div className="masthead">
+          <div className="landing-header">
+            <span className="landing-brand">SmallTalk</span>
+            <div className="landing-tool-box">
+              <button className="landing-tool-box-item" type="button"
+                      onClick={this.onModalChange.bind(this, true, LOGIN_MODAL_TABS.SIGN_UP)}>
+                      Sign Up
+              </button>
+              <button className="landing-tool-box-item" type="button"
+                      onClick={this.onModalChange.bind(this, true, LOGIN_MODAL_TABS.SIGN_IN)}>
+                      Sign In
+              </button>
             </div>
-            <Cards  headerText="Why smallTalk?" 
-                    textGroup={ 
-                        [
-                            {
-                                title: "Fully configurable",
-                                description: "She literature discovered increasing how diminution understood. Though and highly the enough county for man. Of it up he still court alone widow seems. Suspected he remainder rapturous my sweetness. All vanity regard sudden nor simple can. World mrs and vexed china since after often."
-                            },
-                            {
-                                title: "Manage the team easily",
-                                description: "Same an quit most an. Admitting an mr disposing sportsmen. Tried on cause no spoil arise plate. Longer ladies valley get esteem use led six. Middletons resolution advantages e"
-                            },
-                            {
-                                title: "Never miss stuffs again!",
-                                description: "Promotion an ourselves up otherwise my. High what each snug rich far yet easy. In companions inhabiting mr principles at insensible do. Heard their sex hoped enjoy vexed child for. Prosperous so occasional assistance it discovered especially no. Provision of he residence"
-                            }
-                        ]}
-            />
-        </React.Fragment>
-    )
+          </div>
+          <LandingModal modal={this.state.modal}
+                        activeTab={this.state.signUpOrSignIn}
+                        onModalChange={this.onModalChange} />
+          <div className="container d-flex h-100 align-items-center">
+            <div className="mx-auto text-center">
+              <h1 className="mx-auto my-0 text-uppercase">SmallTalk</h1>
+              <h2 className="text-white-50 mx-auto mt-2 mb-5">Manage Team Like a Country</h2>
+            </div>
+          </div>
+        </div>
+        <LandingInfoCards headerText="Why smallTalk?" textGroup={INTRO_CONTENTS} />
+      </React.Fragment>
+    );
+  }
 }
+
+export default Landing;

@@ -1,14 +1,10 @@
-import React,{Component} from 'react';
-import devices from '../../../assets/img/devices.png';
+import React, { Component } from 'react';
+import './details.scss';
 
-class details extends Component{
-    constructor(props){
-        super(props);
-    }
-
-    render(){
-        return(
-            <section></section>
-        );
-    }
+class Details extends Component {
+  constructor(props) {
+    super(props);
+  }
 }
+
+export default Details;

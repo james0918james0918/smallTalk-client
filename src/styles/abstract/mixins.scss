@@ -1,4 +1,4 @@
-@mixin flexLayout($direction: row, $justify: normal,$align: normal){
+@mixin flexLayout($direction: row, $justify: normal, $align: normal){
     display: flex;
     flex-direction: $direction;
     justify-content: $justify;
@@ -6,7 +6,7 @@
     @content;
 }
 
-@mixin gridLayout($row:none,$column:none,$rowGap:0px,$columnGap:0px){
+@mixin gridLayout($row: none, $column: none, $rowGap: 0px, $columnGap: 0px){
     display: grid;
     grid-template-rows: $row;
     grid-template-columns: $column;
@@ -15,16 +15,16 @@
     @content;
 }
 
-@mixin littleIcon($height,$width){
+@mixin littleIcon($height, $width){
     height: $height;
     $width: $width;
     @content;
 }
 
-@mixin horizontalLine($width,$color,$offset){
+@mixin horizontalLine($width, $color, $offset){
     content: '';
-    height:3px;
-    width:$width;
+    height: 3px;
+    width: $width;
     background-color: $color;
     transform: $offset;
 }

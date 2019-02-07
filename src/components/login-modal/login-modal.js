@@ -176,4 +176,3 @@ class LoginModal extends Component {
     }
 }
 
-export default LoginModal;

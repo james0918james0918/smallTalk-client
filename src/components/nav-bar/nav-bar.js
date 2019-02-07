@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import './nav-bar.scss';
 
-class Home extends Component {
+class NavBar extends Component {
   constructor(props) {
     super(props);
   }
@@ -8,10 +9,10 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <p>For testing</p>
+        <p>Placeholder</p>
       </div>
     )
   }
 }
 
-export default Home;
+export default NavBar;
