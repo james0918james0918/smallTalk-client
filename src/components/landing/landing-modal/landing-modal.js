@@ -32,13 +32,14 @@ class LandingModal extends Component {
     this.state = {
       modal: this.props.modal,
       activeTab: this.props.activeTab,
+      invalid: true,
       formData: {
-        firstName: '',
-        lastName: '',
-        email: '',
-        username: '',
-        password: '',
-        confirmPassword: '',
+        firstName: null,
+        lastName: null,
+        email: null,
+        username: null,
+        password: null,
+        confirmPassword: null,
         gender: null,
       },
       isLoading: false
@@ -47,6 +48,7 @@ class LandingModal extends Component {
     this.toggle = this.toggle.bind(this);
     this.onTabClick = this.onTabClick.bind(this);
     this.onInputFieldsChange = this.onInputFieldsChange.bind(this);
+    this.formEnable = this.formEnable.bind(this);
     this.submit = this.submit.bind(this);
   }
 
@@ -80,6 +82,11 @@ class LandingModal extends Component {
     }
   }
 
+  formEnable(formValidBits) {
+    // check if all bits are set
+    this.setState({ invalid: !Object.keys(formValidBits).every(bit => formValidBits[bit]) });
+  }
+
   onInputFieldsChange(e) {
     // Use HTML's name property to identify the field changed
     const { formData } = this.state;
@@ -96,6 +103,14 @@ class LandingModal extends Component {
           this.props.history.push('/');
         });
     } else {
+      // send the request to the server to ask the server to send the email
+      (async function(userInfo) {
+        try {
+          let res = await userService.sendEmail( userInfo );
+        } catch(e) {
+        }
+      }) (this.state.formData);
+
       userService.create({
         name: {
           firstName: this.state.formData.firstName,
@@ -130,7 +145,8 @@ class LandingModal extends Component {
             <TabContent activeTab={this.state.activeTab}>
               <TabPane className="input-form" tabId={LOGIN_MODAL_TABS.SIGN_UP}>
                 <SignUpForm onInputFieldsChange={this.onInputFieldsChange}
-                            formStates={this.state.formData}
+                            formEnable={this.formEnable}
+                            formData={this.state.formData}
                 />
               </TabPane>
               <TabPane className="input-form" tabId={LOGIN_MODAL_TABS.SIGN_IN}>
