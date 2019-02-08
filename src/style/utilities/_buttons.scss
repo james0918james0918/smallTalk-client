@@ -1,0 +1,26 @@
+
+
+@mixin persudo-line($color:white,$degree:0deg){
+    display: block;
+    content: '';
+    height: 2px;
+    width: 6rem;
+    background-color: $color;
+    transform: rotateZ($degree);
+}
+
+.add-button{
+    @include removeButtonDefault();
+    @include flexLayout($direction: column,$justify:center);
+    height: 8rem;
+    width: 8rem;
+    border-radius: 50%;
+    background-color: white;
+    
+    &::before{
+        @include persudo-line($color:black,$degree:90deg);
+    }
+    &::after{
+        @include persudo-line($color:black);
+    }
+}

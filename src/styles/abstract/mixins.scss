@@ -14,6 +14,7 @@
     grid-column-gap: $columnGap;
     @content;
 }
+<<<<<<< HEAD:src/styles/abstract/mixins.scss
 
 @mixin littleIcon($height, $width){
     height: $height;
@@ -22,9 +23,21 @@
 }
 
 @mixin horizontalLine($width, $color, $offset){
+=======
+@mixin horizontalLine($width,$color,$offset){
+>>>>>>> Before merging to master:src/style/abstract/_mixins.scss
     content: '';
     height: 3px;
     width: $width;
     background-color: $color;
     transform: $offset;
 }
+<<<<<<< HEAD:src/styles/abstract/mixins.scss
+=======
+
+@mixin removeButtonDefault(){
+    // change the button default
+    border:none;
+    cursor: pointer;
+}
+>>>>>>> Before merging to master:src/style/abstract/_mixins.scss

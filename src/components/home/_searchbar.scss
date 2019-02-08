@@ -1,0 +1,11 @@
+.searchbar{
+    @include flexLayout();
+    padding: 2rem;
+    &__btn{
+        @include removeButtonDefault();
+    }
+
+    &__input{
+        
+    }
+}

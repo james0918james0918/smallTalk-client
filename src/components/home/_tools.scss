@@ -1,0 +1,7 @@
+.tools{
+    @include flexLayout($justify: space-between);
+    grid-column: home-start/home-end;
+    grid-row: 1/2;
+    padding:6rem;
+    color:white;
+}
