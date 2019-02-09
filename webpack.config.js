@@ -3,6 +3,8 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
+  // babel-polyfill is required to make async/await work
+  entry: ['babel-polyfill', './src/index.js'],
   module: {
     rules: [
       {

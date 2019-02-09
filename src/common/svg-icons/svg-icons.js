@@ -1,4 +1,5 @@
-import React from 'react';
+import React from 'react'
+import '../../styles/utilities/icon.scss'
 const svgIcons=[
    (
         <svg className="icon" viewBox="0 0 480 480">

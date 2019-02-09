@@ -1,3 +1,6 @@
+@import '../../styles/abstract/mixins.scss';
+@import '../../styles/abstract/variables.scss';
+
 .searchbar{
     @include flexLayout();
     padding: 2rem;

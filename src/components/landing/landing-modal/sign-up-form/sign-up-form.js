@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { LOGIN_MODAL_TABS } from '../../../../constants/login';
 import _ from 'lodash';
 
 import {
@@ -71,12 +72,12 @@ class SignUpForm extends Component {
 
   accountValidation(e, minLength) {
     const validReg = /\S*[A-Z]\S*[A-Z]\S*/;
-    if (e.target.name.length > minLength && validReg.test(e.target.value)) {
+    if (e.target.value.length > minLength && validReg.test(e.target.value)) {
       this.changeFieldsValid(e,true);
-      this.props.onInputFieldsChange(e.target.name, e.target.value);
+      this.props.onInputFieldsChange('formData',e.target.name, e.target.value);
     } else {
       this.changeFieldsValid(e,false);
-      this.props.onInputFieldsChange(e.target.name, null);
+      this.props.onInputFieldsChange('formData',e.target.name, null);
     }
   }
 
@@ -87,27 +88,27 @@ class SignUpForm extends Component {
       if (e.target.name.length > 0) {
         this.changeFieldsValid(e, true);
         // Update the parent component when input is valid
-        this.props.onInputFieldsChange(e.target.name, e.target.value);
+        this.props.onInputFieldsChange('formData',e.target.name, e.target.value);
       } else {
         this.changeFieldsValid(e, false);
-        this.props.onInputFieldsChange(e.target.name, null);
+        this.props.onInputFieldsChange('formData',e.target.name, null);
       }
     } else if (e.target.name === 'email') {
       const emailReg = /^\S+@\S+\.\S+$/;
       if (emailReg.test(e.target.value)) {
         this.changeFieldsValid(e, true);
-        this.props.onInputFieldsChange(e.target.name, e.target.value);
+        this.props.onInputFieldsChange('formData',e.target.name, e.target.value);
       } else {
         this.changeFieldsValid(e, false);
-        this.props.onInputFieldsChange(e.target.name, null);
+        this.props.onInputFieldsChange('formData',e.target.name, null);
       }
     } else if (e.target.name === 'username') {
       // for account
       // length > 6 && at least two capital letters
       this.accountValidation(e, 6);
-      this.props.onInputFieldsChange(e.target.name, e.target.value);
+      this.props.onInputFieldsChange('formData',e.target.name, e.target.value);
     }
-    this.props.formEnable(this.state.formValidBits); // is the form valid?
+    this.props.formEnable('formData'); // is the form valid?
   }
 
   handlePasswordOnChange(e) {
@@ -119,26 +120,26 @@ class SignUpForm extends Component {
       if ((passwordReg1.test(e.target.value) || passwordReg2.test(e.target.value))
         && this.state.formData[e.target.name].length > 7) {
         this.changeFieldsValid(e, true);
-        this.props.onInputFieldsChange(e.target.name, e.target.value);
+        this.props.onInputFieldsChange('formData',e.target.name, e.target.value);
       } else {
         this.changeFieldsValid(e, false);
-        this.props.onInputFieldsChange(e.target.name, null);
+        this.props.onInputFieldsChange('formData',e.target.name, null);
       }
     } else if (e.target.value === this.state.formData.password) {
       this.changeFieldsValid(e, true);
-      this.props.onInputFieldsChange(e.target.name, e.target.value);
+      this.props.onInputFieldsChange('formData',e.target.name, e.target.value);
     } else {
       this.changeFieldsValid(e, false);
-      this.props.onInputFieldsChange(e.target.name, null);
+      this.props.onInputFieldsChange('formData',e.target.name, null);
     }
-    this.props.formEnable(this.state.formValidBits); // is the form valid?
+    this.props.formEnable('formData'); // is the form valid?
   }
 
   handleGenderOnChange(e) {
     this.changeState(e); // Change the local state of the form
-    this.props.onInputFieldsChange(e.target.name, e.target.value);
+    this.props.onInputFieldsChange('formData',e.target.name, e.target.value);
     this.changeFieldsValid(e, true); // simply change the gender bit to true
-    this.props.formEnable(this.state.formValidBits); // is the form valid?
+    this.props.formEnable('formData'); // is the form valid?
   }
 
   render() {

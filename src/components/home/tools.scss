@@ -1,3 +1,6 @@
+@import '../../styles/abstract/mixins.scss';
+@import '../../styles/abstract/variables.scss';
+
 .tools{
     @include flexLayout($justify: space-between);
     grid-column: home-start/home-end;

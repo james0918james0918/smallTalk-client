@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Tools from './tools'
-import Cards from './cards'
+import Cards from './home-cards'
+import './home.scss'
 export default class Home extends Component{
 
     constructor(props){

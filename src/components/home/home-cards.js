@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
-import Card from './card'
-
+import Card from './home-card'
+//import './home.scss'
 export default class Cards extends Component{
     constructor(props){
         super(props);

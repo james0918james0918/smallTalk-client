@@ -42,6 +42,10 @@ class LandingModal extends Component {
         confirmPassword: null,
         gender: null,
       },
+      signinFormData: {
+        username: null,
+        password: null,
+      },
       isLoading: false
     };
 
@@ -79,19 +83,29 @@ class LandingModal extends Component {
       this.setState({
         activeTab: tab
       });
+      // perform a re-check when switching between tabs in order to determine whether the submit btn can be enabled or not
+      if(tab === LOGIN_MODAL_TABS.SIGN_UP) this.formEnable('formData');
+      else this.formEnable('signinFormData');
     }
   }
 
-  formEnable(formValidBits) {
-    // check if all bits are set
-    this.setState({ invalid: !Object.keys(formValidBits).every(bit => formValidBits[bit]) });
+  formEnable(tab) {
+    // check if all fields are not null
+    this.setState({ invalid: !Object.keys(this.state[tab]).every(field => this.state[tab][field]) })
   }
 
-  onInputFieldsChange(e) {
+  onInputFieldsChange(whichForm,fieldName,value) {
     // Use HTML's name property to identify the field changed
-    const { formData } = this.state;
-    formData[e.target.name] = e.target.value;
-    this.setState({ formData });
+    if(whichForm === 'formData'){
+      const formData = {...this.state.formData};
+      formData[fieldName]=value;
+      this.setState({ formData });
+    }
+    else{
+      const signinFormData = {...this.state.signinFormData};
+      signinFormData[fieldName]=value;
+      this.setState({ signinFormData });
+    }
   }
 
   submit() {
@@ -108,6 +122,7 @@ class LandingModal extends Component {
         try {
           let res = await userService.sendEmail( userInfo );
         } catch(e) {
+          console.log(e);
         }
       }) (this.state.formData);
 
@@ -118,6 +133,7 @@ class LandingModal extends Component {
         },
         username: this.state.formData.username,
         password: this.state.formData.password,
+        gender: this.state.formData.gender,
         email: this.state.formData.email
       }).then(() => this.props.history.push('/'));
     }
@@ -152,6 +168,7 @@ class LandingModal extends Component {
               <TabPane className="input-form" tabId={LOGIN_MODAL_TABS.SIGN_IN}>
                 <SignInForm onInputFieldsChange={this.onInputFieldsChange}
                             formData={this.state.formData}
+                            formEnable={this.formEnable}
                 />
               </TabPane>
             </TabContent>
