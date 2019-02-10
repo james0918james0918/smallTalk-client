@@ -9,18 +9,25 @@
     padding: 2rem;
 
     &__cards{
-        @include gridLayout($column:repeat(auto-fit,minmax(7rem,1fr)));
+        @include gridLayout($column:repeat(auto-fit,minmax(30rem,1fr)),$rowGap:7rem,$columnGap:7rem);
         grid-column: home-start/home-end;
         grid-row: 2/3;
     }
 
     &__card{
+        @include gridLayout($row:25rem min-content);
         background: {
             color: white;
         }
-
-        font-size: 4rem;
+        font-size: 3rem;
         color:black;
-        padding: 3rem;
+        &__img{
+            height: 100%;
+            width: 100%;
+            //object-fit: cover;
+        }
+        &__title{
+            justify-self: center;
+        }
     }
 }

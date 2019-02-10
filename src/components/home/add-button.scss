@@ -1,27 +1,33 @@
+@import '../../styles/abstract/variables.scss';
 @import '../../styles/abstract/mixins.scss';
-
-
-@mixin persudo-line($color:white,$degree:0deg){
-    display: block;
-    content: '';
-    height: 2px;
-    width: 6rem;
-    background-color: $color;
-    transform: rotateZ($degree);
-}
 
 .add-button{
     @include removeButtonDefault();
-    @include flexLayout($direction: column,$justify:center);
+    @include flexLayout($direction: column,$justify:center,$align:center);
     height: 8rem;
     width: 8rem;
+    padding: 3rem;
     border-radius: 50%;
-    background-color: white;
+    color:white;
+    background-color:  #ffb900;
+    transition: all .4s;
+    &:hover{
+        color: #ffb900;
+        background-color: white;
+    }
     
+    // goes down when pushed
+    &:active{
+        transform: translateY(2px);
+    }
+
     &::before{
-        @include persudo-line($color:black,$degree:90deg);
+        @include horizontalLine(3px,4.5rem,currentcolor,rotateZ(90deg));
+        transition: all .4s;
     }
     &::after{
-        @include persudo-line($color:black);
+        @include horizontalLine(3px,4.5rem,currentcolor,rotateZ(0deg) translateY(-2px));
+        transition: all .4s;
     }
 }
+

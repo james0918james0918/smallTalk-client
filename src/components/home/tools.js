@@ -11,7 +11,6 @@ export default class Tools extends Component{
         return (
             <div className="tools">
                 <Searchbar  findGroups={ this.props.findGroups }
-                            setqueryMatchToFalse={ this.props.setqueryMatchToFalse }
                             queryMatched={this.props.queryMatched}/>
                 <AddButton />
             </div>

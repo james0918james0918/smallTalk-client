@@ -97,14 +97,17 @@ class LandingModal extends Component {
   onInputFieldsChange(whichForm,fieldName,value) {
     // Use HTML's name property to identify the field changed
     if(whichForm === 'formData'){
-      const formData = {...this.state.formData};
+      const formData = {...this.state.formData}; // can be better?
       formData[fieldName]=value;
-      this.setState({ formData });
+      // setState is async
+      // so invalid must be checked inside the callback function of setState
+      // guarantee to get updated state
+      this.setState({ formData }, this.formEnable.bind(this,whichForm) );
     }
     else{
       const signinFormData = {...this.state.signinFormData};
       signinFormData[fieldName]=value;
-      this.setState({ signinFormData });
+      this.setState({ signinFormData }, this.formEnable.bind(this,whichForm));
     }
   }
 
@@ -161,14 +164,12 @@ class LandingModal extends Component {
             <TabContent activeTab={this.state.activeTab}>
               <TabPane className="input-form" tabId={LOGIN_MODAL_TABS.SIGN_UP}>
                 <SignUpForm onInputFieldsChange={this.onInputFieldsChange}
-                            formEnable={this.formEnable}
                             formData={this.state.formData}
                 />
               </TabPane>
               <TabPane className="input-form" tabId={LOGIN_MODAL_TABS.SIGN_IN}>
                 <SignInForm onInputFieldsChange={this.onInputFieldsChange}
                             formData={this.state.formData}
-                            formEnable={this.formEnable}
                 />
               </TabPane>
             </TabContent>

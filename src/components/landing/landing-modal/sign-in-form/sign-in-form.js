@@ -49,8 +49,6 @@ class SignInForm extends Component {
     });
     // change the valid bits
     this.changeFieldValid(e);
-    // check if the form is valid by testing formValidBits
-    this.props.formEnable('signinFormData');
   }
 
   render() {

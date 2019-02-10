@@ -16,12 +16,17 @@ export default class Home extends Component{
                 },
                 {
                     title: "mygroup3"
-                }
+                },
+                {
+                    title: "mygroup4"
+                },
+                {
+                    title: "mygroup5"
+                },
             ],
             queryMatched : '',
         }
         this.findGroups = this.findGroups.bind(this);
-        this.setqueryMatchToFalse = this.setqueryMatchToFalse.bind(this);
     }
 
     findGroups(queryFromChild){      
@@ -37,15 +42,10 @@ export default class Home extends Component{
         }
     }
 
-    setqueryMatchToFalse(){
-        this.setState({ queryMatch: false });
-    }
-
     render(){
         return (
             <section className="home">
                 <Tools  findGroups={ this.findGroups }
-                        setqueryMatchToFalse={ this.setqueryMatchToFalse }
                         queryMatched={ this.state.queryMatched }/>
                 <Cards  groups={ this.state.groups }
                         queryMatch={ this.state.queryMatch } 

@@ -14,7 +14,7 @@
         color: $color-green-moredark;
         grid-column: 2/3;
         &::after{
-            @include horizontalLine(16rem,$color-green-moredark,translateY(4rem));
+            @include horizontalLine(3px,16rem,$color-green-moredark,translateY(4rem));
         }
     }
     &__intro{
@@ -53,7 +53,7 @@
         font-size:2rem;
         padding:1rem;
         &::before{
-            @include horizontalLine(16rem,$color-green-dark,translateY(-2rem));
+            @include horizontalLine(3px,16rem,$color-green-dark,translateY(-2rem));
         }
     }
     &__btn{

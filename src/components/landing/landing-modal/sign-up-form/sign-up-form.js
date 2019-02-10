@@ -108,7 +108,6 @@ class SignUpForm extends Component {
       this.accountValidation(e, 6);
       this.props.onInputFieldsChange('formData',e.target.name, e.target.value);
     }
-    this.props.formEnable('formData'); // is the form valid?
   }
 
   handlePasswordOnChange(e) {
@@ -132,14 +131,12 @@ class SignUpForm extends Component {
       this.changeFieldsValid(e, false);
       this.props.onInputFieldsChange('formData',e.target.name, null);
     }
-    this.props.formEnable('formData'); // is the form valid?
   }
 
   handleGenderOnChange(e) {
     this.changeState(e); // Change the local state of the form
     this.props.onInputFieldsChange('formData',e.target.name, e.target.value);
     this.changeFieldsValid(e, true); // simply change the gender bit to true
-    this.props.formEnable('formData'); // is the form valid?
   }
 
   render() {

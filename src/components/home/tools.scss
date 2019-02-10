@@ -2,9 +2,9 @@
 @import '../../styles/abstract/variables.scss';
 
 .tools{
-    @include flexLayout($justify: space-between);
+    @include flexLayout($justify: space-between,$align:center);
     grid-column: home-start/home-end;
     grid-row: 1/2;
-    padding:6rem;
+    padding:3rem;
     color:white;
 }
