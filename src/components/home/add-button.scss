@@ -9,10 +9,10 @@
     padding: 3rem;
     border-radius: 50%;
     color:white;
-    background-color:  #ffb900;
+    background-color:  $color-orange-light;
     transition: all .4s;
     &:hover{
-        color: #ffb900;
+        color: $color-orange-light;
         background-color: white;
     }
     

@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 import { string as yupString, object as yupObject } from 'yup'
 import { Link } from 'react-router-dom'
+import { ADD_TEAM_FORM_FIELDS }  from '../../constants/index'
 import './add-team-form.scss'
 
 const initialValues = {
@@ -19,8 +20,20 @@ const teamSchema = yupObject({
 })
 
 
+const inputGroups = () => ADD_TEAM_FORM_FIELDS.map( 
+        (item,index) => {
+           return (
+            <div className="addTeamForm__inputGroup" key={index}>
+                <label htmlFor={item.field} className={`addTeamForm__inputGroup__label addTeamForm__inputGroup__label--${item.field}`}>{item.label}</label>
+                <Field name={item.field} type={item.type} id={item.field} placeholder={item.placeholder} className={`addTeamForm__inputGroup__input addTeamForm__inputGroup__input--${item.field}`}/>
+                <ErrorMessage name={item.field}>{msg => <div className="addTeamForm__inputGroup__error">{msg}</div>}</ErrorMessage>
+            </div>
+           )
+        }
+    )
+
 const addTeamForm = () => (
-    <div className="addTeamForm">
+    <div className="addTeamFormContainer">
        <Formik
             initialValues={initialValues}
             validationSchema={teamSchema}
@@ -29,21 +42,17 @@ const addTeamForm = () => (
             }}
             render={props=>{
                 return (
-                    <Form>
-                        <div>
-                            <label htmlFor="title">Team name</label>
-                            <Field name="title" type="text" id="title"/>
-                            <ErrorMessage name="title">{msg => <div>{msg}</div>}</ErrorMessage>
-                        </div>
-                        <div>
-                            <label htmlFor="description">Team description</label>
-                            <Field name="description" type="text" id="description"/>
-                            <ErrorMessage name="description">{msg => <div>{msg}</div>}</ErrorMessage>
-                        </div>
-                        <div>
-                            <button type="submit" disabled={props.isSubmitting}>Create the team!</button>
-                            <button type="button" disabled={props.isSubmitting}>
-                                { !props.isSubmitting ? <Link to="/">Go back to home</Link> : 'Go back to home' }
+                    <Form className="addTeamForm">
+                        { inputGroups() }
+                        {/* <div className="addTeamForm__inputGroup">
+                            <label htmlFor="file" className="addTeamForm__inputGroup__label">Upload your files</label>
+                            <Field name="file" type="file" id="file" placeholder={item.placeholder} className="addTeamForm__inputGroup__input"/>
+                            <ErrorMessage name="file">{msg => <div className="addTeamForm__inputGroup__error">{msg}</div>}</ErrorMessage>
+                        </div> */}
+                        <div className="addTeamForm__buttonGroup">
+                            <button type="submit" disabled={props.isSubmitting} className="addTeamForm__button addTeamForm__button--create">Create the team!</button>
+                            <button type="button" disabled={props.isSubmitting} className="addTeamForm__button addTeamForm__button--backHome">
+                                { !props.isSubmitting ? <Link to="/" className="addTeamForm__link">Go back to home</Link> : 'Go back to home' }
                             </button>
                         </div>
                     </Form>
