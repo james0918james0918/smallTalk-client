@@ -11,10 +11,11 @@ export const ADD_TEAM_FORM_FIELDS = [
         type: 'text',
         placeholder: 'Introduction to my cool squad!'
     },
-    {
-        field: 'file',
-        label: 'Upload your team logo',
-        type: 'file',
-        placeholder: ''
-    },
 ];
+
+export const FILE_TEAM_FROM_FIELD={
+    field: 'file',
+    label: 'Upload your team logo',
+    type: 'file',
+    placeholder: ''
+}

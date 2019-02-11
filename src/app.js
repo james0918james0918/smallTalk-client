@@ -2,10 +2,9 @@ import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Routes from './routes';
 import NavBar from './components/nav-bar/nav-bar';
-
 import addFontAwesomeIcons from './common/font-awesome-icons/font-awesome-icons';
-// reset the font to 10px
-import './styles/layout/reset.scss';
+import './styles/layout/reset.scss'; // reset the font to 10px
+
 addFontAwesomeIcons();
 
 export default () => {

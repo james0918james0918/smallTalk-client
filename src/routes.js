@@ -4,12 +4,12 @@ import AddTeamForm from './components/add-team-form/add-team-form';
 import Home from './components/home/home';
 import Landing from './components/landing/landing';
 
-const GuardedRoute = ({ component: Component, ...rest }) => 
+const GuardedRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={props => (
     localStorage.getItem('user')
       ? <Component {...props} />
       : <Redirect to={{ pathname: '/landing', state: { from: props.location } }} />)} />
-;
+);
 
 const routes = () => (
   <div>
