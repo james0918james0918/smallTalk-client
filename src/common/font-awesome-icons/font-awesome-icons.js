@@ -9,7 +9,9 @@ import {
   faSpinner,
   faUser,
   faUserPlus,
-  faVenus
+  faVenus,
+  faSearchPlus,
+  faSearch,
 } from '@fortawesome/free-solid-svg-icons';
 
 const addFontAwesomeIcons = () => (
@@ -23,7 +25,9 @@ const addFontAwesomeIcons = () => (
     faSpinner,
     faUser,
     faUserPlus,
-    faVenus
+    faVenus,
+    faSearchPlus,
+    faSearch
   )
 );
 

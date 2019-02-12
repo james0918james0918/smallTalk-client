@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './search-bar.scss';
 
 export default class Searchbar extends Component {
@@ -24,9 +25,11 @@ export default class Searchbar extends Component {
   render() {
     return (
       <div className="searchbar">
-        <button className="searchbar__btn" type="button" onClick={this.submit}>search</button>
-        <div className="searchbar__tag"> {this.props.queryMatched} </div>
+        <button className="searchbar__btn" type="button" onClick={this.submit}>
+          <FontAwesomeIcon icon="search" className="searchbar__btn__icon" />
+        </button>
         <input className="searchbar__input" name="query" type="text" placeholder="Search for your group" onChange={this.handleQueryOnChange} />
+        <div>{this.state.query}</div>
       </div>
     );
   }

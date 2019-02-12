@@ -60,7 +60,8 @@
     }
 
         &__link {
-
+            @include flexLayout($align:center);
+            height: 8rem;
             &,
             &:hover {
                 color: currentColor;
@@ -74,7 +75,6 @@
 
         &__button {
             @include removeButtonDefault();
-            padding: 2rem;
             border-radius: 7rem;
             color: white;
             transition: all .3s;
@@ -88,8 +88,6 @@
             }
 
             &--backHome {
-                // make the link 100% high and wide as the button
-                display: flex;
                 background-color: $color-error;
             }
         }

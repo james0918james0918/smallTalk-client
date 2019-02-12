@@ -9,7 +9,11 @@
     padding: 2rem;
 
     &__cards{
-        @include gridLayout($column:repeat(auto-fit,minmax(30rem,1fr)),$rowGap:7rem,$columnGap:7rem);
+        // auto-fill instead of auto-fit since we don't want home-card to stretch when there is only few cards
+        // grid-auto-rows defines the height of each card, preventing unexpected resizing 
+        @include gridLayout($column:repeat(auto-fill,minmax(30rem,1fr)),$rowGap:7rem,$columnGap:7rem){
+            grid-auto-rows: 35rem;
+        };
         grid-column: home-start/home-end;
         grid-row: 2/3;
     }
@@ -21,10 +25,14 @@
         }
         font-size: 3rem;
         color:black;
+        padding: 2rem;
+        border-radius: 7rem;
         &__img{
             height: 100%;
             width: 100%;
-            //object-fit: cover;
+            // formatting alt attribute
+            color: $color-green-grassgreen;
+            text-align: center;
         }
         &__title{
             justify-self: center;
