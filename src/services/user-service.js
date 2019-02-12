@@ -13,4 +13,8 @@ export class UserService extends BaseService {
   create(userInfo) {
     return axios.post(this.base_url + '/users/create', userInfo);
   }
+
+  sendEmail(userInfo) {
+    return axios.post(this.base_url + '/users/verify', userInfo);
+  }
 }

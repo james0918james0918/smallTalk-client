@@ -15,18 +15,40 @@ class SignInForm extends Component {
 
     this.state = {
       username: this.props.formData.username,
-      password: this.props.formData.password
+      password: this.props.formData.password,
+      formValidBits:{
+        username: false,
+        password: false,
+      }
     };
 
-    this.onInputFieldsChange.bind(this);
+    this.onInputFieldsChange = this.onInputFieldsChange.bind(this);
+    this.changeFieldValid = this.changeFieldValid.bind(this);
   }
+
+  changeFieldValid(e){
+    const { formValidBits } = this.state;
+    // username and password should not be empty
+    if(e.target.value.length > 0){
+      formValidBits[e.target.name] = true;
+      // update the formdata
+      this.props.onInputFieldsChange('signinFormData',e.target.name,e.target.value);
+    }
+    else{
+      formValidBits[e.target.name] = false;
+      // update the formdata
+      this.props.onInputFieldsChange('signinFormData',e.target.name,null);
+    }
+    this.setState({ formValidBits });
+  };
 
   onInputFieldsChange(e) {
     const { name, value } = e.target;
     this.setState({
       [name]: value
     });
-    this.props.onInputFieldsChange(e);
+    // change the valid bits
+    this.changeFieldValid(e);
   }
 
   render() {
@@ -39,7 +61,7 @@ class SignInForm extends Component {
           <Input id="signInUsernameInput"
                  name="username"
                  placeholder="Username/Email"
-                 onChange={this.props.onInputFieldsChange}
+                 onChange={this.onInputFieldsChange}
                  required
           />
         </FormGroup>
@@ -51,7 +73,7 @@ class SignInForm extends Component {
                  name="password"
                  placeholder="Password"
                  type="password"
-                 onChange={this.props.onInputFieldsChange}
+                 onChange={this.onInputFieldsChange}
           />
         </FormGroup>
       </Form>

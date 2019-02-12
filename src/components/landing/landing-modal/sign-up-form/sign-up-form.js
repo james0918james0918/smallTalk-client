@@ -27,7 +27,7 @@ class SignUpForm extends Component {
         confirmPassword: false,
         gender: false
       },
-      formFirstBits:{
+      formFirstBits: {
         firstName: true,
         lastName: true,
         email: true,
@@ -48,9 +48,9 @@ class SignUpForm extends Component {
   // Get updates from the parent component
   componentDidUpdate(prevProps) {
     if (!_.isEqual(this.props.formData, prevProps.formData)) {
-      this.setState({
-        formData: this.props.formData
-      });
+      // this.setState({
+      //   formData: this.props.formData
+      // });
     }
   }
 
@@ -71,12 +71,12 @@ class SignUpForm extends Component {
 
   accountValidation(e, minLength) {
     const validReg = /\S*[A-Z]\S*[A-Z]\S*/;
-    if (e.target.name.length > minLength && validReg.test(e.target.value)) {
-      this.changeFieldsValid(e,true);
-      this.props.onInputFieldsChange(e.target.name, e.target.value);
+    if (e.target.value.length > minLength && validReg.test(e.target.value)) {
+      this.changeFieldsValid(e, true);
+      this.props.onInputFieldsChange('formData', e.target.name, e.target.value);
     } else {
-      this.changeFieldsValid(e,false);
-      this.props.onInputFieldsChange(e.target.name, null);
+      this.changeFieldsValid(e, false);
+      this.props.onInputFieldsChange('formData', e.target.name, null);
     }
   }
 
@@ -87,27 +87,34 @@ class SignUpForm extends Component {
       if (e.target.name.length > 0) {
         this.changeFieldsValid(e, true);
         // Update the parent component when input is valid
-        this.props.onInputFieldsChange(e.target.name, e.target.value);
+        this.props.onInputFieldsChange(
+          'formData',
+          e.target.name,
+          e.target.value
+        );
       } else {
         this.changeFieldsValid(e, false);
-        this.props.onInputFieldsChange(e.target.name, null);
+        this.props.onInputFieldsChange('formData', e.target.name, null);
       }
     } else if (e.target.name === 'email') {
       const emailReg = /^\S+@\S+\.\S+$/;
       if (emailReg.test(e.target.value)) {
         this.changeFieldsValid(e, true);
-        this.props.onInputFieldsChange(e.target.name, e.target.value);
+        this.props.onInputFieldsChange(
+          'formData',
+          e.target.name,
+          e.target.value
+        );
       } else {
         this.changeFieldsValid(e, false);
-        this.props.onInputFieldsChange(e.target.name, null);
+        this.props.onInputFieldsChange('formData', e.target.name, null);
       }
     } else if (e.target.name === 'username') {
       // for account
       // length > 6 && at least two capital letters
       this.accountValidation(e, 6);
-      this.props.onInputFieldsChange(e.target.name, e.target.value);
+      this.props.onInputFieldsChange('formData', e.target.name, e.target.value);
     }
-    this.props.formEnable(this.state.formValidBits); // is the form valid?
   }
 
   handlePasswordOnChange(e) {
@@ -117,28 +124,30 @@ class SignUpForm extends Component {
       const passwordReg1 = /\S*[A-Z]\S*\W+\S*/;
       const passwordReg2 = /\S*\W+\S*[A-Z]\S*/;
       if ((passwordReg1.test(e.target.value) || passwordReg2.test(e.target.value))
-        && this.state.formData[e.target.name].length > 7) {
+      && this.state.formData[e.target.name].length > 7) {
         this.changeFieldsValid(e, true);
-        this.props.onInputFieldsChange(e.target.name, e.target.value);
+        this.props.onInputFieldsChange(
+          'formData',
+          e.target.name,
+          e.target.value
+        );
       } else {
         this.changeFieldsValid(e, false);
-        this.props.onInputFieldsChange(e.target.name, null);
+        this.props.onInputFieldsChange('formData', e.target.name, null);
       }
     } else if (e.target.value === this.state.formData.password) {
       this.changeFieldsValid(e, true);
-      this.props.onInputFieldsChange(e.target.name, e.target.value);
+      this.props.onInputFieldsChange('formData', e.target.name, e.target.value);
     } else {
       this.changeFieldsValid(e, false);
-      this.props.onInputFieldsChange(e.target.name, null);
+      this.props.onInputFieldsChange('formData', e.target.name, null);
     }
-    this.props.formEnable(this.state.formValidBits); // is the form valid?
   }
 
   handleGenderOnChange(e) {
     this.changeState(e); // Change the local state of the form
-    this.props.onInputFieldsChange(e.target.name, e.target.value);
+    this.props.onInputFieldsChange('formData', e.target.name, e.target.value);
     this.changeFieldsValid(e, true); // simply change the gender bit to true
-    this.props.formEnable(this.state.formValidBits); // is the form valid?
   }
 
   render() {
@@ -146,81 +155,149 @@ class SignUpForm extends Component {
       <Form id="signUpForm">
         <FormGroup>
           <Label for="FullNameInput" className="required">
-            <FontAwesomeIcon icon="file-signature" />{' '}Full Name
+            <FontAwesomeIcon icon="file-signature" /> Full Name
           </Label>
           <InputGroup id="fullNameInput">
-            <Input name="firstName" id="firstNameInput" placeholder="First Name" inline="true"
-                   valid={this.state.formValidBits.firstName}
-                   invalid={!this.state.formValidBits.firstName && !this.state.formFirstBits.firstName}
-                   onChange={this.handleNormalOnChange} />
-            <Input name="lastName" id="lastNameInput" placeholder="Last Name" inline="true"
-                   valid={this.state.formValidBits.lastName}
-                   invalid={!this.state.formValidBits.lastName && !this.state.formFirstBits.lastName}
-                   onChange={this.handleNormalOnChange} />
+            <Input
+              name="firstName"
+              id="firstNameInput"
+              placeholder="First Name"
+              inline="true"
+              valid={this.state.formValidBits.firstName}
+              invalid={
+                !this.state.formValidBits.firstName &&
+                !this.state.formFirstBits.firstName
+              }
+              onChange={this.handleNormalOnChange}
+            />
+            <Input
+              name="lastName"
+              id="lastNameInput"
+              placeholder="Last Name"
+              inline="true"
+              valid={this.state.formValidBits.lastName}
+              invalid={
+                !this.state.formValidBits.lastName &&
+                !this.state.formFirstBits.lastName
+              }
+              onChange={this.handleNormalOnChange}
+            />
             <FormFeedback>Both name fields should be filled.</FormFeedback>
           </InputGroup>
         </FormGroup>
         <FormGroup>
           <Label for="emailInput" className="required">
-            <FontAwesomeIcon icon="envelope" />{' '}Email
+            <FontAwesomeIcon icon="envelope" /> Email
           </Label>
-          <Input name="email" id="emailInput" className="normalInput" placeholder="test@example.com" type="email"
-                 valid={this.state.formValidBits.email}
-                 invalid={!this.state.formValidBits.email && !this.state.formFirstBits.email}
-                 onChange={this.handleNormalOnChange} />
+          <Input
+            name="email"
+            id="emailInput"
+            className="normalInput"
+            placeholder="test@example.com"
+            type="email"
+            valid={this.state.formValidBits.email}
+            invalid={
+              !this.state.formValidBits.email && !this.state.formFirstBits.email
+            }
+            onChange={this.handleNormalOnChange}
+          />
           <FormFeedback>Please enter a valid email!</FormFeedback>
         </FormGroup>
         <FormGroup>
           <Label for="usernameInput" className="required">
-            <FontAwesomeIcon icon="user" />{' '}Username
+            <FontAwesomeIcon icon="user" /> Username
           </Label>
-          <Input name="username" id="usernameInput" placeholder="Username"
-                 valid={this.state.formValidBits.username}
-                 invalid={!this.state.formValidBits.username && !this.state.formFirstBits.username}
-                 onChange={this.handleNormalOnChange} />
-          <FormFeedback>Username must contain at least 6 letters, includeing two capital letters.</FormFeedback>
+          <Input
+            name="username"
+            id="usernameInput"
+            placeholder="Username"
+            valid={this.state.formValidBits.username}
+            invalid={
+              !this.state.formValidBits.username &&
+              !this.state.formFirstBits.username
+            }
+            onChange={this.handleNormalOnChange}
+          />
+          <FormFeedback>
+            Username must contain at least 6 letters, includeing two capital
+            letters.
+          </FormFeedback>
         </FormGroup>
         <FormGroup>
           <Label for="passwordInput" className="required">
-            <FontAwesomeIcon icon="key" />{' '}Password
+            <FontAwesomeIcon icon="key" /> Password
           </Label>
-          <Input name="password" id="passwordInput" placeholder="Password" type="password"
-                 valid={this.state.formValidBits.password}
-                 invalid={!this.state.formValidBits.password && !this.state.formFirstBits.password}
-                 onChange={this.handlePasswordOnChange} />
-          <FormFeedback>Password must contain at least 7 letters, including one capital letter and one symbol.</FormFeedback>
+          <Input
+            name="password"
+            id="passwordInput"
+            placeholder="Password"
+            type="password"
+            valid={this.state.formValidBits.password}
+            invalid={
+              !this.state.formValidBits.password &&
+              !this.state.formFirstBits.password
+            }
+            onChange={this.handlePasswordOnChange}
+          />
+          <FormFeedback>
+            Password must contain at least 7 letters, including one capital
+            letter and one symbol.
+          </FormFeedback>
         </FormGroup>
         <FormGroup>
           <Label for="confirmPasswordInput" className="required">
-            <FontAwesomeIcon icon="redo" />{' '}Confirm Password
+            <FontAwesomeIcon icon="redo" /> Confirm Password
           </Label>
-          <Input name="confirmPassword" id="confirmPasswordInput" placeholder="Password" type="password"
-                 valid={this.state.formValidBits.confirmPassword}
-                 invalid={!this.state.formValidBits.confirmPassword && !this.state.formFirstBits.confirmPassword}
-                 onChange={this.handlePasswordOnChange} />
+          <Input
+            name="confirmPassword"
+            id="confirmPasswordInput"
+            placeholder="Password"
+            type="password"
+            valid={this.state.formValidBits.confirmPassword}
+            invalid={
+              !this.state.formValidBits.confirmPassword &&
+              !this.state.formFirstBits.confirmPassword
+            }
+            onChange={this.handlePasswordOnChange}
+          />
           <FormFeedback>Passwords must match!</FormFeedback>
         </FormGroup>
         <FormGroup tag="fieldset">
           <Label className="required">
-            <FontAwesomeIcon icon="mars" />{' '}
-            <FontAwesomeIcon icon="venus" />{' '}Gender
+            <FontAwesomeIcon icon="mars" /> <FontAwesomeIcon icon="venus" />{" "}
+            Gender
           </Label>
           <FormGroup check className="gender-choice">
             <Label check>
-              <Input type="radio" name="gender" value="male" onChange={this.handleGenderOnChange} />
-              {' '}Male
+              <Input
+                type="radio"
+                name="gender"
+                value="male"
+                onChange={this.handleGenderOnChange}
+              />{' '}
+              Male
             </Label>
           </FormGroup>
           <FormGroup check className="gender-choice">
             <Label check>
-              <Input type="radio" name="gender" value="female" onChange={this.handleGenderOnChange} />
-              {' '}Female
+              <Input
+                type="radio"
+                name="gender"
+                value="female"
+                onChange={this.handleGenderOnChange}
+              />{' '}
+              Female
             </Label>
           </FormGroup>
           <FormGroup check className="gender-choice">
             <Label check>
-              <Input type="radio" name="gender" value="unidentified" onChange={this.handleGenderOnChange} />
-              {' '}Don&#39;t want to identify
+              <Input
+                type="radio"
+                name="gender"
+                value="unidentified"
+                onChange={this.handleGenderOnChange}
+              />{' '}
+              Don&#39;t want to identify
             </Label>
           </FormGroup>
         </FormGroup>

@@ -9,6 +9,6 @@ export default props => (
     <p className="customedCard__description">
       {props.description}
     </p>
-    <button className="customedCard__btn">Learn more</button>
+    <button type="button" className="customedCard__btn">Learn more</button>
   </div>
 );

@@ -1,0 +1,43 @@
+@import '../../styles/abstract/mixins.scss';
+@import '../../styles/abstract/variables.scss';
+
+.home{
+    @include gridLayout($column:10vw [home-start] 80vw [home-end] 10vw,$row:1fr 3fr){
+       justify-content: center;
+    };
+    background-color: $color-green;
+    // if the search result only matches few groups, the hight of the home page should always be 100 vh
+    min-height: 100vh;
+    padding: 2rem;
+
+    &__cards{
+        // auto-fill instead of auto-fit since we don't want home-card to stretch when there is only few cards
+        // grid-auto-rows defines the height of each card, preventing unexpected resizing 
+        @include gridLayout($column:repeat(auto-fill,minmax(30rem,1fr)),$rowGap:7rem,$columnGap:7rem){
+            grid-auto-rows: 35rem;
+        };
+        grid-column: home-start/home-end;
+        grid-row: 2/3;
+    }
+
+    &__card{
+        @include gridLayout($row:25rem min-content);
+        background: {
+            color: white;
+        }
+        font-size: 3rem;
+        color:black;
+        padding: 2rem;
+        border-radius: 7rem;
+        &__img{
+            height: 100%;
+            width: 100%;
+            // formatting alt attribute
+            color: $color-green-grassgreen;
+            text-align: center;
+        }
+        &__title{
+            justify-self: center;
+        }
+    }
+}

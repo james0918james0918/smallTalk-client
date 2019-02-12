@@ -1,0 +1,20 @@
+@import '../../../styles/abstract/mixins.scss';
+@import '../../../styles/abstract/variables.scss';
+
+.searchbar {
+    @include flexLayout($justify:center);
+    border-radius: 1rem;
+    height: 12%;
+    // padding: 2rem;
+    &__input{
+        border: 5px solid $color-blue-light;
+    }
+    &__btn {
+        @include removeButtonDefault();
+        background-color: $color-blue-light;
+        border: 5px solid $color-blue-light;
+        font-size: 1.2rem;
+        color: white;
+    }
+    
+}

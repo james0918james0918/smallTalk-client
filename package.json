@@ -4,7 +4,7 @@
   "description": "Manage Team Like a Country",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --open --mode development",
+    "start": "webpack-dev-server --open --mode development --history-api-fallback",
     "build": "webpack --mode production",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint"
@@ -12,18 +12,20 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.8",
-    "@fortawesome/free-solid-svg-icons": "^5.5.0",
-    "@fortawesome/react-fontawesome": "^0.1.3",
+    "@fortawesome/fontawesome-svg-core": "^1.2.14",
+    "@fortawesome/free-solid-svg-icons": "^5.7.1",
+    "@fortawesome/react-fontawesome": "^0.1.4",
     "axios": "^0.18.0",
     "bootstrap": "^4.1.3",
     "classnames": "^2.2.6",
+    "formik": "^1.5.0",
     "history": "^4.7.2",
     "lodash": "^4.17.11",
     "react": "^16.6.0",
     "react-dom": "^16.6.0",
     "react-router-dom": "^4.3.1",
-    "reactstrap": "^6.5.0"
+    "reactstrap": "^6.5.0",
+    "yup": "^0.26.10"
   },
   "devDependencies": {
     "@babel/core": "^7.1.2",

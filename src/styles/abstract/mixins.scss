@@ -14,17 +14,17 @@
     grid-column-gap: $columnGap;
     @content;
 }
-
-@mixin littleIcon($height, $width){
-    height: $height;
-    $width: $width;
-    @content;
-}
-
-@mixin horizontalLine($width, $color, $offset){
+@mixin horizontalLine($height,$width,$color,$offset){
+    display: block;
     content: '';
-    height: 3px;
+    height: $height;
     width: $width;
     background-color: $color;
     transform: $offset;
+}
+
+@mixin removeButtonDefault(){
+    // change the button default
+    border:none;
+    cursor: pointer;
 }

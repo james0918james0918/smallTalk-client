@@ -14,7 +14,7 @@
         color: $color-green-moredark;
         grid-column: 2/3;
         &::after{
-            @include horizontalLine(16rem,$color-green-moredark,translateY(4rem));
+            @include horizontalLine(3px,16rem,$color-green-moredark,translateY(4rem));
         }
     }
     &__intro{
@@ -53,10 +53,11 @@
         font-size:2rem;
         padding:1rem;
         &::before{
-            @include horizontalLine(16rem,$color-green-dark,translateY(-2rem));
+            @include horizontalLine(3px,16rem,$color-green-dark,translateY(-2rem));
         }
     }
     &__btn{
+        @include removeButtonDefault();
         display: inline-block;
         height:70%;
         padding: 1rem 3rem;
@@ -66,9 +67,6 @@
         background-color: $color-green-moredark;
         color: white;
         align-self: center;
-        // change the button default
-        border:none;
-        cursor: pointer;
         &:hover{
             transform: translateY(-5px);
             box-shadow: 0 1rem 2rem rgba(black,.2);

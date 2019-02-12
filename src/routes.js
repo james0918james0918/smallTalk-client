@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import AddTeamForm from './components/add-team-form/add-team-form';
 import Home from './components/home/home';
 import Landing from './components/landing/landing';
 
@@ -13,6 +14,7 @@ const GuardedRoute = ({ component: Component, ...rest }) => (
 const routes = () => (
   <div>
     <GuardedRoute exact path="/" component={Home} />
+    <GuardedRoute exact path="/addTeam" component={AddTeamForm} />
     <Route path="/landing" component={Landing} />
   </div>
 );
