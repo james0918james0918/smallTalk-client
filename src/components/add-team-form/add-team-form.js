@@ -41,7 +41,7 @@ const fileInputGroup = (setFieldValue, logoFileObj) => (
   </div>
 );
 
-const addTeamForm = () => (
+const AddTeamForm = () => (
   <div className="addTeamFormContainer">
     <Formik
       initialValues={initialValues}
@@ -65,4 +65,4 @@ const addTeamForm = () => (
   </div>
 );
 
-export default addTeamForm;
+export default AddTeamForm;

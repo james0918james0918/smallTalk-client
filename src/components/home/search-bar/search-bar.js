@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './search-bar.scss';
 
-export default class Searchbar extends Component {
+export default class SearchBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -29,7 +29,7 @@ export default class Searchbar extends Component {
           <FontAwesomeIcon icon="search" className="searchbar__btn__icon" />
         </button>
         <input className="searchbar__input" name="query" type="text" placeholder="Search for your group" onChange={this.handleQueryOnChange} />
-        <div>{this.state.query}</div>
+        <div className="searchbar__tag">{this.state.query}</div>
       </div>
     );
   }

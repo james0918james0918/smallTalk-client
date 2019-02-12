@@ -6,6 +6,8 @@
        justify-content: center;
     };
     background-color: $color-green;
+    // if the search result only matches few groups, the hight of the home page should always be 100 vh
+    min-height: 100vh;
     padding: 2rem;
 
     &__cards{

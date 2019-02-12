@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Card from './home-card/home-card';
+import HomeCard from './home-card/home-card';
 
-export default class Cards extends Component {
+export default class HomeCards extends Component {
   constructor(props) {
     super(props);
     this.createCards = this.createCards.bind(this);
@@ -10,13 +10,13 @@ export default class Cards extends Component {
 
   createMatchingCards() {
     return this.props.matchingGroups.map((item, index) => (
-      <Card title={item.title} key={index} />
+      <HomeCard title={item.title} key={index} />
     ));
   }
 
   createCards() {
     return this.props.groups.map((item, index) => (
-      <Card title={item.title} key={index} />
+      <HomeCard title={item.title} key={index} />
     ));
   }
 

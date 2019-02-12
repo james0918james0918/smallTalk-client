@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Tools from './tools/tools';
-import Cards from './home-cards/home-cards';
+import HomeCards from './home-cards/home-cards';
 import './home.scss';
 
 export default class Home extends Component {
@@ -45,7 +45,7 @@ export default class Home extends Component {
       <section className="home">
         <Tools findGroups={this.findGroups}
           queryMatched={this.state.queryMatched} />
-        <Cards groups={this.state.groups}
+        <HomeCards groups={this.state.groups}
           queryMatch={this.state.queryMatch}
           matchingGroups={this.state.matchingGroups} />
       </section>

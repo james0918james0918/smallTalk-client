@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Card = ({ title }) => (
+const HomeCard = ({ title }) => (
   <div className="home__card">
     <img
       src="http://localhost:18080/assets/teamwork.jpg"
@@ -11,4 +11,4 @@ const Card = ({ title }) => (
   </div>
 );
 
-export default Card;
+export default HomeCard;
