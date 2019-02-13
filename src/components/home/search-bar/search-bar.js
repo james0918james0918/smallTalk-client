@@ -2,13 +2,17 @@ import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './search-bar.scss';
 
-const SearchBarTag = props =>
-  props.queryMatched ? (
-    <div className="search--bar__tag">
-      <FontAwesomeIcon icon="times-circle" className="search--bar__btn__icon" />
-      <span>{props.queryMatched}</span>
-    </div>
-  ) : null;
+const SearchBarTag = (props) => {
+  const wrapper = () => {
+    props.deleteQuery(props.query);
+  };
+  return (
+    <button type="button" className="search--bar__tag" onClick={wrapper}>
+      <FontAwesomeIcon icon="times-circle" className="search--bar__tag__icon" />
+      <span className="search--bar__tag__text">{props.query}</span>
+    </button>
+  );
+};
 
 export default class SearchBar extends Component {
   constructor(props) {
@@ -37,7 +41,7 @@ export default class SearchBar extends Component {
           type="button"
           onClick={this.submit}
         >
-          <FontAwesomeIcon icon="search" className="search--bar__btn__icon" />
+          <FontAwesomeIcon icon="search" />
         </button>
         <input
           className="search--bar__input"
@@ -46,7 +50,10 @@ export default class SearchBar extends Component {
           placeholder="Search for your group"
           onChange={this.handleQueryOnChange}
         />
-        <SearchBarTag queryMatched={this.props.queryMatched} />
+        {
+          this.props.queries.map((item, index) =>
+            <SearchBarTag query={item} deleteQuery={this.props.deleteQuery} key={index} />)
+        }
       </div>
     );
   }

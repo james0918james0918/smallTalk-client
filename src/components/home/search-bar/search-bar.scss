@@ -26,14 +26,25 @@
         font-size: 1.4rem;
         transform: translateX(10px); // overlap the input
         color: white;
-        &__icon{
-           cursor: pointer;
-        }
     }
     &__tag{
-        @include flexLayout($align:center);
-        flex: 0 0 5%;
+        @include removeButtonDefault();
+        @include flexLayout($justify:center,$align:center){
+            align-self: center;
+        };
+        flex: 0 0 7%;
         margin-left: 1rem;
+        height: min-content;
+        border-radius: 1.5rem;
+        color: white;
+        background-color: $color-blue-light;
+        padding: .3rem;
+        &__icon{
+            cursor: pointer;
+        }
+        &__text{
+            margin-left: 2px;
+        }
     }
     
 }
