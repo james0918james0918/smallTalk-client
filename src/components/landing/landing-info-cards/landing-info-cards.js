@@ -27,7 +27,7 @@ class LandingInfoCards extends Component {
       <section className="cards">
         <h1 className="cards__header">{this.props.headerText}</h1>
         <p className="cards__intro"> Manage the team in the way you can&#39;t even imagine. </p>
-        <div className="cards__cardsArea">
+        <div className="cards__cards--area">
           {this.createCards()}
         </div>
       </section>

@@ -4,7 +4,6 @@
 
 .addTeamFormContainer {
     @include gridLayout($column: 30vw 1fr 30vw, $row:25vh 1fr 25vh);
-    height: 100vh;
     background-color: $color-green;
 }
 

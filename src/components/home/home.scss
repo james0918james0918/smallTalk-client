@@ -2,7 +2,7 @@
 @import '../../styles/abstract/variables.scss';
 
 .home{
-    @include gridLayout($column:10vw [home-start] 80vw [home-end] 10vw,$row:1fr 3fr){
+    @include gridLayout($column:10vw [home-start] 80vw [home-end] 10vw,$row:25rem min-content){
        justify-content: center;
     };
     background-color: $color-green;

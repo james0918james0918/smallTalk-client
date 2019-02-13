@@ -24,7 +24,7 @@ export default class Home extends Component {
           title: 'mygroup5'
         },
       ],
-      queryMatched: '',
+      queryMatched: [],
       matchingGroups: [],
     };
     this.findGroups = this.findGroups.bind(this);
@@ -33,10 +33,10 @@ export default class Home extends Component {
   findGroups(queryFromChild) {
     const matchingGroups = this.state.groups.filter(cur => cur.title.includes(queryFromChild));
     if (matchingGroups.length > 0) {
-      // query successful, set flag to true
-      this.setState({ queryMatched: queryFromChild, matchingGroups });
+      queryMatched.push(queryFromChild);
+      this.setState({ queryMatched, matchingGroups });
     } else {
-      this.setState({ queryMatched: '', matchingGroups });
+      this.setState({ matchingGroups });
     }
   }
 

@@ -26,21 +26,20 @@ class SignInForm extends Component {
     this.changeFieldValid = this.changeFieldValid.bind(this);
   }
 
-  changeFieldValid(e){
+  changeFieldValid(e) { 
     const { formValidBits } = this.state;
     // username and password should not be empty
-    if(e.target.value.length > 0){
+    if (e.target.value.length > 0) {
       formValidBits[e.target.name] = true;
       // update the formdata
-      this.props.onInputFieldsChange('signinFormData',e.target.name,e.target.value);
-    }
-    else{
+      this.props.onInputFieldsChange('signinFormData', e.target.name, e.target.value);
+    } else {
       formValidBits[e.target.name] = false;
       // update the formdata
-      this.props.onInputFieldsChange('signinFormData',e.target.name,null);
+      this.props.onInputFieldsChange('signinFormData', e.target.name, null);
     }
     this.setState({ formValidBits });
-  };
+  }
 
   onInputFieldsChange(e) {
     const { name, value } = e.target;
