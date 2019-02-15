@@ -9,44 +9,52 @@ export default class Home extends Component {
     this.state = {
       groups: [
         {
-          title: 'mygroup1'
+          title: 'mygrou1'
         },
         {
-          title: 'mygroup2'
+          title: 'nba'
         },
         {
           title: 'mygroup3'
         },
         {
-          title: 'mygroup4'
+          title: 'tzuyu'
         },
         {
-          title: 'mygroup5'
+          title: 'my'
         },
       ],
-      queryMatched: '',
+      queries: [],
       matchingGroups: [],
     };
     this.findGroups = this.findGroups.bind(this);
+    this.deleteQuery = this.deleteQuery.bind(this);
   }
 
-  findGroups(queryFromChild) {
-    const matchingGroups = this.state.groups.filter(cur => cur.title.includes(queryFromChild));
-    if (matchingGroups.length > 0) {
-      // query successful, set flag to true
-      this.setState({ queryMatched: queryFromChild, matchingGroups });
-    } else {
-      this.setState({ queryMatched: '', matchingGroups });
-    }
+  findGroups(queryFromChild = '') {
+    const queries = [...this.state.queries];
+    if (queryFromChild) queries.push(queryFromChild);
+    // at least contains one of the queries
+    const matchingGroups = this.state.groups
+      .filter(cur => queries.some(query => cur.title.includes(query)));
+    this.setState({ queries, matchingGroups });
+  }
+
+  deleteQuery(target) {
+    console.log(target);
+    // delete the query and refind the matchingGroups
+    this.setState({ queries: this.state.queries
+      .filter(query => query !== target) }, this.findGroups);
   }
 
   render() {
     return (
       <section className="home">
         <Tools findGroups={this.findGroups}
-          queryMatched={this.state.queryMatched} />
+          queries={this.state.queries}
+          deleteQuery={this.deleteQuery} />
         <HomeCards groups={this.state.groups}
-          queryMatch={this.state.queryMatch}
+          queries={this.state.queries}
           matchingGroups={this.state.matchingGroups} />
       </section>
     );

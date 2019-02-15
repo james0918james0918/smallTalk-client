@@ -12,6 +12,7 @@ import {
   faVenus,
   faSearchPlus,
   faSearch,
+  faTimesCircle
 } from '@fortawesome/free-solid-svg-icons';
 
 const addFontAwesomeIcons = () => (
@@ -27,7 +28,8 @@ const addFontAwesomeIcons = () => (
     faUserPlus,
     faVenus,
     faSearchPlus,
-    faSearch
+    faSearch,
+    faTimesCircle
   )
 );
 

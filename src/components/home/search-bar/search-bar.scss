@@ -1,20 +1,50 @@
 @import '../../../styles/abstract/mixins.scss';
 @import '../../../styles/abstract/variables.scss';
 
-.searchbar {
-    @include flexLayout($justify:center);
-    border-radius: 1rem;
-    height: 12%;
-    // padding: 2rem;
+.search--bar {
+    @include flexLayout();
+    width: 40%;
     &__input{
-        border: 5px solid $color-blue-light;
+        flex: 0 0 60%; // flex-basis=80% means this element will be 80% as wide as its parent 
+        border: 7px solid $color-blue-light;
+        border-radius: 5px;
+        color: $color-green-light;
+        padding: .9rem;
+        &::placeholder{
+            font-weight: bold;
+        }
+        &:focus{
+            color: $color-blue-light;
+        }
     }
     &__btn {
+        flex: 0 0 10%;
         @include removeButtonDefault();
         background-color: $color-blue-light;
         border: 5px solid $color-blue-light;
-        font-size: 1.2rem;
+        border-radius: 5px;
+        font-size: 1.4rem;
+        transform: translateX(10px); // overlap the input
         color: white;
+    }
+    &__tag{
+        @include removeButtonDefault();
+        @include flexLayout($justify:center,$align:center){
+            align-self: center;
+        };
+        flex: 0 0 7%;
+        margin-left: 1rem;
+        height: min-content;
+        border-radius: 1.5rem;
+        color: white;
+        background-color: $color-blue-light;
+        padding: .3rem;
+        &__icon{
+            cursor: pointer;
+        }
+        &__text{
+            margin-left: 2px;
+        }
     }
     
 }

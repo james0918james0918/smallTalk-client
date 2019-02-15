@@ -12,6 +12,7 @@
     "no-undef": "off",
     "no-useless-constructor": "off",
     "no-confusing-arrow": "off",
+    "no-shadow": "off",
     "object-curly-newline": "off",
     "prefer-template":"off",
     "quotes": [2, "single", { "avoidEscape": true }],
@@ -25,6 +26,7 @@
     "react/no-access-state-in-setstate": "off",
     "react/no-array-index-key": "off",
     "react/prop-types": "off",
-    "react/sort-comp": "off"
+    "react/sort-comp": "off",
+    "wrap-iife": [2,"inside"] 
   }
 }

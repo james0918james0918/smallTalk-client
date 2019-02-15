@@ -6,10 +6,11 @@ import '../add-button/add-button.scss';
 
 const AddButton = () => <Link to="/addTeam" className="add-button" />;
 
-const Tools = ({ findGroups, queryMatched }) => (
+const Tools = ({ findGroups, queries, deleteQuery }) => (
   <div className="tools">
     <SearchBar findGroups={findGroups}
-               queryMatched={queryMatched} />
+               queries={queries}
+               deleteQuery={deleteQuery} />
     <AddButton />
   </div>
 );
