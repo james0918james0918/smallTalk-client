@@ -84,7 +84,6 @@ const AddTeamForm = props => (
       initialValues={initialValues}
       validationSchema={teamSchema}
       onSubmit={(values) => {
-        console.log(props.history);
         (async () => {
           const response = await teamService.addTeam(values);
           if (response.status === 200) {

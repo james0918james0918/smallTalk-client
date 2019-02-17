@@ -41,7 +41,6 @@ export default class Home extends Component {
   }
 
   deleteQuery(target) {
-    console.log(target);
     // delete the query and refind the matchingGroups
     this.setState({ queries: this.state.queries
       .filter(query => query !== target) }, this.findGroups);

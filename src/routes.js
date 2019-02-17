@@ -1,5 +1,6 @@
 import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Redirect, Switch } from 'react-router-dom';
+import EmailVerification from './components/email-verification/email-verification';
 import AddTeamForm from './components/add-team-form/add-team-form';
 import Home from './components/home/home';
 import Landing from './components/landing/landing';
@@ -12,11 +13,13 @@ const GuardedRoute = ({ component: Component, ...rest }) => (
 );
 
 const routes = () => (
-  <div>
+  <Switch>
     <GuardedRoute exact path="/" component={Home} />
     <GuardedRoute exact path="/addTeam" component={AddTeamForm} />
     <Route path="/landing" component={Landing} />
-  </div>
+    <Route path="/verify" component={EmailVerification} />
+    <Route render={() => <p> 404 not found </p>} />
+  </Switch>
 );
 
 export default routes;

@@ -17,4 +17,12 @@ export class UserService extends BaseService {
   sendEmail(userInfo) {
     return axios.post(this.base_url + '/users/verify', userInfo);
   }
+
+  validateEmail(token) {
+    return axios.get(this.base_url + 'users/verify', {
+      params: {
+        token
+      }
+    });
+  }
 }

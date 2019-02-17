@@ -83,7 +83,8 @@ class LandingModal extends Component {
       this.setState({
         activeTab: tab
       });
-      // perform a re-check when switching between tabs in order to determine whether the submit btn can be enabled or not
+      // perform a re-check when switching between tabs
+      // in order to determine whether the submit btn can be enabled or not
       if (tab === LOGIN_MODAL_TABS.SIGN_UP) this.formEnable('formData');
       else this.formEnable('signinFormData');
     }
@@ -144,7 +145,7 @@ class LandingModal extends Component {
           gender: this.state.formData.gender,
           email: this.state.formData.email
         })
-        .then(() => this.props.history.push('/'));
+        .then(() => this.props.history.push('/landing'));
     }
   }
 
