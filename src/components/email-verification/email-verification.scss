@@ -2,6 +2,10 @@
 @import '../../styles/abstract/variables.scss';
 
 .email-verification {
-  font-size: 10rem;
-  color: $color-green;
+  height: 100vh;
+  background-color: $color-green;
+  &__text{
+    font-size: 10rem;
+    color: white;
+  }
 }

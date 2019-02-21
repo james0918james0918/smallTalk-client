@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { SpinnerContext } from '../../services/spinner-service';
-import { UserService } from '../../services/user-service';
+import { SpinnerContext, UserService } from '../../services/index';
 import './email-verification.scss';
 
+
 const userService = new UserService();
-export default class EmailVerification extends Component {
+class EmailVerification extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -16,31 +16,34 @@ export default class EmailVerification extends Component {
 
   componentDidMount() {
     const { toggleSpinner } = this.context;
+    toggleSpinner();
     (async () => {
       try {
-        const res = await userService.validateEmail(this.props.match.params.token);
-        if (res.status === 200) {
-          this.setState({ isProcessing: false, validated: true });
-        } else {
-          this.setState({ isProcessing: false, validated: false });
-        }
-        toggleSpinner();
+        await userService.validateEmail(this.props.match.params.token);
+        this.setState({ isProcessing: false, validated: true }, toggleSpinner);
       } catch (err) {
-        console.log(err);
+        // enter catch block if res.status !== 200
+        // if(err.response): The request was made and the server responded with a status code
+        // which falls out of the range of 2xx
+        // if(err.request): request is made but no response is recieved
+        this.setState({ isProcessing: false, validated: false }, toggleSpinner);
       }
     })();
   }
 
   render() {
     let element = null;
-    if (this.state.isProcessing) element = <div className="email-verification"> Validating, please wait a second... </div>;
+    if (this.state.isProcessing) element = <div className="email-verification__text"> Validating, please wait a second... </div>;
     else {
       element = this.state.validated ? <Redirect to="/" /> : <Redirect to="/landing" />;
     }
-    return (
-      <Route path={`${this.props.match.url}/:token`} Component={element} />
-    );
+    return element;
   }
 }
-
 EmailVerification.contextType = SpinnerContext;
+
+export default ({ match }) => (
+  <div className="email-verification">
+    <Route path={`${match.path}/:token`} component={EmailVerification} />
+  </div>
+);

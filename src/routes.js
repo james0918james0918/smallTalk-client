@@ -16,8 +16,8 @@ const routes = () => (
   <Switch>
     <GuardedRoute exact path="/" component={Home} />
     <GuardedRoute exact path="/addTeam" component={AddTeamForm} />
-    <Route path="/landing" component={Landing} />
-    <Route path="/verify" component={EmailVerification} />
+    <Route exact path="/landing" component={Landing} />
+    <Route path="/verification" component={EmailVerification} />
     <Route render={() => <p> 404 not found </p>} />
   </Switch>
 );
