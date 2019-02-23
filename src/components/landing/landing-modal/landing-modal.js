@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import classnames from "classnames";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { withRouter } from "react-router-dom";
+import React, { Component } from 'react';
+import classnames from 'classnames';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { withRouter } from 'react-router-dom';
 
-import { AuthService, UserService } from "../../../services/index";
+import { AuthService, UserService } from '../../../services/index';
 
-import SignInForm from "./sign-in-form/sign-in-form";
-import SignUpForm from "./sign-up-form/sign-up-form";
+import SignInForm from './sign-in-form/sign-in-form';
+import SignUpForm from './sign-up-form/sign-up-form';
 import {
   Button,
   Modal,
@@ -17,11 +17,11 @@ import {
   NavLink,
   TabContent,
   TabPane
-} from "reactstrap";
+} from 'reactstrap';
 
-import { LOGIN_MODAL_TABS } from "../../../constants/login";
-import LoaderButton from "../../../common/loader-button/loader-button";
-import "./landing-modal.scss";
+import { LOGIN_MODAL_TABS } from '../../../constants/login';
+import LoaderButton from '../../../common/loader-button/loader-button';
+import './landing-modal.scss';
 
 const userService = new UserService();
 const authService = new AuthService();
@@ -129,6 +129,7 @@ class LandingModal extends Component {
       (async (userInfo) => {
         try {
           let res = await userService.sendEmail(userInfo);
+          console.log(res);
         } catch (e) {
           console.log(e);
         }
@@ -197,7 +198,7 @@ class LandingModal extends Component {
           </ModalBody>
           <ModalFooter>
             <LoaderButton
-              color={!this.state.invalid ? "primary" : "light"}
+              color={!this.state.invalid ? 'primary' : 'light'}
               disabled={this.state.invalid}
               onClick={this.submit}
               type="submit"

@@ -15,10 +15,15 @@ export class UserService extends BaseService {
   }
 
   sendEmail(userInfo) {
-    return axios.post(this.base_url + '/users/verify', userInfo);
+    return axios.post(this.base_url + '/users/verification', userInfo);
   }
 
   validateEmail(token) {
-    return axios.post(`${this.base_url}/users/verify/${token}`);
+    return axios.post(`${this.base_url}/users/verification/${token}`)
+      .then((response) => {
+        console.log('response returned by validateEmail');
+        console.log(response);
+        localStorage.setItem('user', JSON.stringify(response.data.user));
+      });
   }
 }

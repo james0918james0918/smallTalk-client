@@ -20,6 +20,9 @@ class EmailVerification extends Component {
     (async () => {
       try {
         await userService.validateEmail(this.props.match.params.token);
+        // doesn't return anything, the promise returned by then
+        // gets resolved with an undefined value
+        // so res is undefined right here
         this.setState({ isProcessing: false, validated: true }, toggleSpinner);
       } catch (err) {
         // enter catch block if res.status !== 200
