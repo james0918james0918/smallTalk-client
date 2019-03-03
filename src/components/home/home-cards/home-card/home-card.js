@@ -1,13 +1,13 @@
 import React from 'react';
 
-const HomeCard = ({ title }) => (
+const HomeCard = ({ name, logoId }) => (
   <div className="home__card">
     <img
-      src="http://localhost:18080/assets/teamwork.jpg"
+      src={`http://localhost:18080/public/team-logos/${logoId}.png`}
       alt="Your Team logo"
       className="home__card__img"
     />
-    <p className="home__card__title"> {title} </p>
+    <p className="home__card__name"> {name} </p>
   </div>
 );
 

@@ -118,12 +118,26 @@ class LandingModal extends Component {
   submit() {
     if (this.state.activeTab === LOGIN_MODAL_TABS.SIGN_IN) {
       this.setState({ isLoading: true });
-      authService
-        .logIn(this.state.formData.username, this.state.formData.password)
-        .then(() => {
+      (async () => {
+        try {
+          const { username, password } = this.state.signinFormData;
+          const res = await authService
+            .logIn(username, password);
+          // set the token
+          localStorage.setItem('user', JSON.stringify(res.data.user));
           this.setState({ isLoading: false });
-          this.props.history.push('/');
-        });
+          this.props.history.push(`/${username}/home`);
+        } catch (e) {
+          console.log(e);
+        }
+      })();
+
+      // authService
+      //   .logIn(this.state.formData.username, this.state.formData.password)
+      //   .then(() => {
+      //     this.setState({ isLoading: false });
+      //     this.props.history.push('/');
+      //   });
     } else {
       // send the request to the server to ask the server to send the email
       (async (userInfo) => {

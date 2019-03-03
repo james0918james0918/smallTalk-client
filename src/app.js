@@ -12,7 +12,8 @@ addFontAwesomeIcons();
 export default class App extends Component {
   constructor(props) {
     super(props);
-
+    
+    // these two are for spinner context
     this.toggleSpinner = () => {
       this.setState(state => ({
         isSpinnerLoading: !state.isSpinnerLoading

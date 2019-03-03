@@ -1,8 +1,7 @@
 import React from 'react';
 import { Route, Redirect, Switch } from 'react-router-dom';
 import EmailVerification from './components/email-verification/email-verification';
-import AddTeamForm from './components/add-team-form/add-team-form';
-import Home from './components/home/home';
+import DummyHome from './components/home/home';
 import Landing from './components/landing/landing';
 
 const GuardedRoute = ({ component: Component, ...rest }) => (
@@ -14,8 +13,7 @@ const GuardedRoute = ({ component: Component, ...rest }) => (
 
 const routes = () => (
   <Switch>
-    <GuardedRoute exact path="/" component={Home} />
-    <GuardedRoute exact path="/addTeam" component={AddTeamForm} />
+    <GuardedRoute path="/:username/home" component={DummyHome} />
     <Route exact path="/landing" component={Landing} />
     <Route path="/verification" component={EmailVerification} />
     <Route render={() => <p> 404 not found </p>} />

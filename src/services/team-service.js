@@ -1,8 +1,15 @@
-import BaseService from './base-service';
-import axios from 'axios';
+import { teams } from './axios-service';
 
-export class TeamService extends BaseService {
-  addTeam(teamData) {
-    return axios.post(`${this.base_url}/teams/addTeam`, teamData);
+export class TeamService {
+  createTeam(teamData) {
+    return teams.post('', teamData);
+  }
+
+  fetchTeams() {
+    return teams.get('');
+  }
+
+  uploadTeamLogo(fileStream) {
+    return teams.post('/team-logos', fileStream);
   }
 }

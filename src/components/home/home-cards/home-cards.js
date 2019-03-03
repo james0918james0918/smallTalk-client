@@ -10,13 +10,13 @@ export default class HomeCards extends Component {
 
   createMatchingCards() {
     return this.props.matchingGroups.map((item, index) => (
-      <HomeCard title={item.title} key={index} />
+      <HomeCard name={item.name} logoId={item.logoId} key={index} />
     ));
   }
 
   createCards() {
     return this.props.groups.map((item, index) => (
-      <HomeCard title={item.title} key={index} />
+      <HomeCard name={item.name} logoId={item.logoId} key={index} />
     ));
   }
 

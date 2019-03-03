@@ -25,7 +25,7 @@ class EmailVerification extends Component {
         // so res is undefined right here
         this.setState({ isProcessing: false, validated: true }, toggleSpinner);
       } catch (err) {
-        // enter catch block if res.status !== 200
+        // enter catch block if res.status !== 2xx
         // if(err.response): The request was made and the server responded with a status code
         // which falls out of the range of 2xx
         // if(err.request): request is made but no response is recieved
@@ -44,7 +44,6 @@ class EmailVerification extends Component {
   }
 }
 EmailVerification.contextType = SpinnerContext;
-
 export default ({ match }) => (
   <div className="email-verification">
     <Route path={`${match.path}/:token`} component={EmailVerification} />

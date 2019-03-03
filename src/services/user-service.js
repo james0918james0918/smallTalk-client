@@ -1,9 +1,8 @@
-import BaseService from './base-service';
-import axios from 'axios';
+import { users } from './axios-service';
 
-export class UserService extends BaseService {
+export class UserService {
   get(id) {
-    return axios.get(this.base_url + '/get', {
+    return users.get('/get', {
       params: {
         id
       }
@@ -11,19 +10,14 @@ export class UserService extends BaseService {
   }
 
   create(userInfo) {
-    return axios.post(this.base_url + '/users/create', userInfo);
+    return users.post('/', userInfo);
   }
 
   sendEmail(userInfo) {
-    return axios.post(this.base_url + '/users/verification', userInfo);
+    return users.post('/verification', userInfo);
   }
 
   validateEmail(token) {
-    return axios.post(`${this.base_url}/users/verification/${token}`)
-      .then((response) => {
-        console.log('response returned by validateEmail');
-        console.log(response);
-        localStorage.setItem('user', JSON.stringify(response.data.user));
-      });
+    return users.post(`/verification/${token}`);
   }
 }

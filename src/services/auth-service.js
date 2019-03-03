@@ -1,13 +1,10 @@
-import BaseService from './base-service';
-import axios from 'axios';
+import { authentication } from './axios-service';
 
-export class AuthService extends BaseService {
+export class AuthService {
   logIn(username, password) {
-    return axios.post(this.base_url + '/authentication/login', {
+    return authentication.post('/login', {
       username,
       password
-    }).then((response) => {
-      localStorage.setItem('user', JSON.stringify(response.data.user));
     });
   }
 
