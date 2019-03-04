@@ -23,8 +23,15 @@
     transform: $offset;
 }
 
-@mixin removeButtonDefault(){
+@mixin removeButtonDefault() {
     // change the button default
     border:none;
     cursor: pointer;
+}
+
+@mixin removeLinkDefault() {
+    &:hover, &:focus, &:active {
+        text-decoration: none;
+        color: currentColor;
+   }
 }

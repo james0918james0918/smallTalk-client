@@ -8,6 +8,7 @@ import {
   FILE_TEAM_FROM_FIELD as logo
 } from '../../constants/index';
 import { SpinnerContext, TeamService } from '../../services/index';
+import { getUsernameQuery } from '../../helpers/index';
 import './add-team-form.scss';
 
 const teamService = new TeamService();
@@ -80,11 +81,6 @@ const fileInputGroup = (setFieldValue, logoFileObj) => (
   </div>
 );
 
-const getPathOfHome = (location) => {
-  const { pathname } = location;
-  return pathname.slice(0, pathname.lastIndexOf('/'));
-};
-
 const AddTeamForm = ({ history, location }) => (
   <SpinnerContext.Consumer>
     {/* variable spinnerContext is the context object of the SpinnerContext */}
@@ -108,10 +104,15 @@ const AddTeamForm = ({ history, location }) => (
                 await teamService.createTeam({ ...rest, logoId: resOfLogoId.data });
                 // close spinner
                 spinnerContext.toggleSpinner();
-                // go back to home
-                history.replace(getPathOfHome(location));
+                history.push({
+                  pathname: '/home',
+                  search: `?username=${getUsernameQuery(location.search)}`
+                });
               } catch (err) {
-                console.log(err);
+                // close spinner
+                spinnerContext.toggleSpinner();
+                // go back to landing
+                history.push('/landing');
               }
             })();
           }}
@@ -133,7 +134,11 @@ const AddTeamForm = ({ history, location }) => (
                   className="addTeamForm__button addTeamForm__button--backHome"
                 >
                   {!props.isSubmitting ? (
-                    <Link to={getPathOfHome(location)} className="addTeamForm__link">
+                    <Link to={{
+                      pathname: '/home',
+                      search: `?username=${getUsernameQuery(location.search)}`
+                    }}
+                      className="addTeamForm__link">
                       Go back to home
                     </Link>
                   ) : (

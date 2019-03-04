@@ -3,7 +3,9 @@ import { Route, Switch } from 'react-router-dom';
 import Tools from './tools/tools';
 import HomeCards from './home-cards/home-cards';
 import AddTeamForm from '../add-team-form/add-team-form';
+import NavBar from '../nav-bar/nav-bar';
 import { TeamService } from '../../services/team-service';
+import { getUsernameQuery } from '../../helpers/index';
 import './home.scss';
 
 const teamService = new TeamService();
@@ -12,6 +14,7 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      username: '',
       groups: [],
       queries: [],
       matchingGroups: [],
@@ -22,8 +25,11 @@ class Home extends Component {
 
   async componentDidMount() {
     try {
-      const res = await teamService.fetchTeams();
-      this.setState({ groups: res.data });
+      const username = getUsernameQuery(this.props.location.search);
+      // parse the query string
+      const res = await teamService
+        .fetchTeams(username);
+      this.setState({ groups: res.data, username });
     } catch (err) {
       console.log(err.message);
       if (err.response) this.props.history.push('/landing');
@@ -51,7 +57,8 @@ class Home extends Component {
         <Tools findGroups={this.findGroups}
           queries={this.state.queries}
           deleteQuery={this.deleteQuery}
-          match={this.props.match} />
+          url={this.props.match.url}
+          username={this.state.username} />
         <HomeCards groups={this.state.groups}
           queries={this.state.queries}
           matchingGroups={this.state.matchingGroups} />
@@ -61,9 +68,12 @@ class Home extends Component {
 }
 
 // DummyHome
-export default ({ match }) => (
-  <Switch>
-    <Route exact path={`${match.path}/newTeam`} component={AddTeamForm} />
-    <Route component={Home} />
-  </Switch>
+export default ({ match, location }) => (
+  <React.Fragment>
+    <NavBar location={location} />
+    <Switch>
+      <Route exact path={`${match.url}/newTeam`} component={AddTeamForm} />
+      <Route component={Home} />
+    </Switch>
+  </React.Fragment>
 );

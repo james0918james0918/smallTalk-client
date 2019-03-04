@@ -5,8 +5,12 @@ export class TeamService {
     return teams.post('', teamData);
   }
 
-  fetchTeams() {
-    return teams.get('');
+  fetchTeams(username) {
+    return teams.get('', {
+      params: {
+        username
+      }
+    });
   }
 
   uploadTeamLogo(fileStream) {

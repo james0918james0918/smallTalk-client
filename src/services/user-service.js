@@ -1,10 +1,10 @@
 import { users } from './axios-service';
 
 export class UserService {
-  get(id) {
-    return users.get('/get', {
+  get(username) {
+    return users.get('', {
       params: {
-        id
+        username
       }
     });
   }

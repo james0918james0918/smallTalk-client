@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Routes from './routes';
-import NavBar from './components/nav-bar/nav-bar';
 import { SpinnerContext } from './services/index';
 import { Spinner } from './common/spinner/spinner';
 import addFontAwesomeIcons from './common/font-awesome-icons/font-awesome-icons';
@@ -27,10 +26,8 @@ export default class App extends Component {
   }
 
   render() {
-    const showNavBar = localStorage.getItem('user') ? <NavBar /> : '';
     return (
       <div className="app">
-        {showNavBar}
         <SpinnerContext.Provider value={this.state}>
           <Spinner />
           <Router>

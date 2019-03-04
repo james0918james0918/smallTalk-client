@@ -13,7 +13,7 @@ const GuardedRoute = ({ component: Component, ...rest }) => (
 
 const routes = () => (
   <Switch>
-    <GuardedRoute path="/:username/home" component={DummyHome} />
+    <GuardedRoute path="/home" component={DummyHome} />
     <Route exact path="/landing" component={Landing} />
     <Route path="/verification" component={EmailVerification} />
     <Route render={() => <p> 404 not found </p>} />
