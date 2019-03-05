@@ -7,7 +7,7 @@
         justify-content: center;
     };
     padding:5rem;
-    background-color: $color-grey-light;
+    background-color: white;
     &__header{
         @include flexLayout($direction:column,$align:center);
         font-size: 5rem;

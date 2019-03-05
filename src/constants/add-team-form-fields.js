@@ -1,6 +1,6 @@
 export const ADD_TEAM_FORM_FIELDS = [
   {
-    field: 'title',
+    field: 'name',
     label: 'Your team name',
     type: 'text',
     placeholder: 'MyCoolSquad'
@@ -14,7 +14,7 @@ export const ADD_TEAM_FORM_FIELDS = [
 ];
 
 export const FILE_TEAM_FROM_FIELD = {
-  field: 'file',
+  field: 'teamLogo',
   label: 'Upload your team logo',
   type: 'file',
   placeholder: ''

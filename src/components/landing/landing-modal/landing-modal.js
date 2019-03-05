@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import classnames from "classnames";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { withRouter } from "react-router-dom";
+import React, { Component } from 'react';
+import classnames from 'classnames';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { withRouter } from 'react-router-dom';
 
-import { AuthService, UserService } from "../../../services/index";
+import { AuthService, UserService } from '../../../services/index';
 
-import SignInForm from "./sign-in-form/sign-in-form";
-import SignUpForm from "./sign-up-form/sign-up-form";
+import SignInForm from './sign-in-form/sign-in-form';
+import SignUpForm from './sign-up-form/sign-up-form';
 import {
   Button,
   Modal,
@@ -17,11 +17,11 @@ import {
   NavLink,
   TabContent,
   TabPane
-} from "reactstrap";
+} from 'reactstrap';
 
-import { LOGIN_MODAL_TABS } from "../../../constants/login";
-import LoaderButton from "../../../common/loader-button/loader-button";
-import "./landing-modal.scss";
+import { LOGIN_MODAL_TABS } from '../../../constants/login';
+import LoaderButton from '../../../common/loader-button/loader-button';
+import './landing-modal.scss';
 
 const userService = new UserService();
 const authService = new AuthService();
@@ -83,7 +83,8 @@ class LandingModal extends Component {
       this.setState({
         activeTab: tab
       });
-      // perform a re-check when switching between tabs in order to determine whether the submit btn can be enabled or not
+      // perform a re-check when switching between tabs
+      // in order to determine whether the submit btn can be enabled or not
       if (tab === LOGIN_MODAL_TABS.SIGN_UP) this.formEnable('formData');
       else this.formEnable('signinFormData');
     }
@@ -117,17 +118,32 @@ class LandingModal extends Component {
   submit() {
     if (this.state.activeTab === LOGIN_MODAL_TABS.SIGN_IN) {
       this.setState({ isLoading: true });
-      authService
-        .logIn(this.state.formData.username, this.state.formData.password)
-        .then(() => {
+      (async () => {
+        try {
+          const { username, password } = this.state.signinFormData;
+          const res = await authService
+            .logIn(username, password);
+          // set the token
+          localStorage.setItem('user', JSON.stringify(res.data.user));
           this.setState({ isLoading: false });
-          this.props.history.push('/');
-        });
+          this.props.history.push(`/${username}/home`);
+        } catch (e) {
+          console.log(e);
+        }
+      })();
+
+      // authService
+      //   .logIn(this.state.formData.username, this.state.formData.password)
+      //   .then(() => {
+      //     this.setState({ isLoading: false });
+      //     this.props.history.push('/');
+      //   });
     } else {
       // send the request to the server to ask the server to send the email
       (async (userInfo) => {
         try {
           let res = await userService.sendEmail(userInfo);
+          console.log(res);
         } catch (e) {
           console.log(e);
         }
@@ -144,7 +160,7 @@ class LandingModal extends Component {
           gender: this.state.formData.gender,
           email: this.state.formData.email
         })
-        .then(() => this.props.history.push('/'));
+        .then(() => this.props.history.push('/landing'));
     }
   }
 
@@ -196,7 +212,7 @@ class LandingModal extends Component {
           </ModalBody>
           <ModalFooter>
             <LoaderButton
-              color={!this.state.invalid ? "primary" : "light"}
+              color={!this.state.invalid ? 'primary' : 'light'}
               disabled={this.state.invalid}
               onClick={this.submit}
               type="submit"

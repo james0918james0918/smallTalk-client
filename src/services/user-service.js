@@ -1,20 +1,23 @@
-import BaseService from './base-service';
-import axios from 'axios';
+import { users } from './axios-service';
 
-export class UserService extends BaseService {
-  get(id) {
-    return axios.get(this.base_url + '/get', {
+export class UserService {
+  get(username) {
+    return users.get('', {
       params: {
-        id
+        username
       }
     });
   }
 
   create(userInfo) {
-    return axios.post(this.base_url + '/users/create', userInfo);
+    return users.post('/', userInfo);
   }
 
   sendEmail(userInfo) {
-    return axios.post(this.base_url + '/users/verify', userInfo);
+    return users.post('/verification', userInfo);
+  }
+
+  validateEmail(token) {
+    return users.post(`/verification/${token}`);
   }
 }

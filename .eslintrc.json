@@ -4,6 +4,7 @@
   "rules": {
     "class-methods-use-this":"off",
     "comma-dangle":"off",
+    "func-name-matching": "off",
     "implicit-arrow-linebreak": "off",
     "import/export": "off",
     "import/order": "off",
@@ -12,6 +13,7 @@
     "no-undef": "off",
     "no-useless-constructor": "off",
     "no-confusing-arrow": "off",
+    "no-param-reassign": "off",
     "no-shadow": "off",
     "object-curly-newline": "off",
     "prefer-template":"off",

@@ -1,63 +1,123 @@
-#navBar {
-    min-height: 56px;
-    background-color: #fff;
-}
+@import '../../styles/abstract/variables.scss';
+@import '../../styles/abstract/mixins.scss';
+// #navBar {
+//     min-height: 56px;
+//     background-color: #fff;
+// }
 
-#navBar #navBarToggler {
-    font-size: 80%;
-    padding: 0.75rem;
-    color: #64a19d;
-    border: 1px solid #64a19d;
-}
+// #navBar #navBarToggler {
+//     font-size: 80%;
+//     padding: 0.75rem;
+//     color: #64a19d;
+//     border: 1px solid #64a19d;
+// }
 
-#navBar #navBarToggler:focus {
-    outline: none;
-}
+// #navBar #navBarToggler:focus {
+//     outline: none;
+// }
 
-#navBar #navBarBrand {
-    color: #161616;
-    font-weight: 700;
-    padding: .9rem 0;
-}
+// #navBar #navBarBrand {
+//     color: #161616;
+//     font-weight: 700;
+//     padding: .9rem 0;
+// }
 
-#navBar #navBarNav .nav-bar-item:hover {
-    color: fade(white, 80%);
-    outline: none;
-    background-color: transparent;
-}
+// #navBar #navBarNav .nav-bar-item:hover {
+//     color: fade(white, 80%);
+//     outline: none;
+//     background-color: transparent;
+// }
 
-#navBar #navBarNav .nav-bar-item:focus {
-    outline: none;
-    background-color: transparent;
-}
+// #navBar #navBarNav .nav-bar-item:focus {
+//     outline: none;
+//     background-color: transparent;
+// }
 
-.nav-bar-item {
-    cursor: pointer;
-}
+// .nav-bar-item {
+//     cursor: pointer;
+// }
 
-@media (min-width: 992px) {
-    #navBar {
-        padding-top: 0;
-        padding-bottom: 0;
-        border-bottom: none;
-        background-color: transparent;
-        -webkit-transition: background-color 0.3s ease-in-out;
-        transition: background-color 0.3s ease-in-out;
+// @media (min-width: 992px) {
+//     #navBar {
+//         padding-top: 0;
+//         padding-bottom: 0;
+//         border-bottom: none;
+//         background-color: transparent;
+//         -webkit-transition: background-color 0.3s ease-in-out;
+//         transition: background-color 0.3s ease-in-out;
+//     }
+
+//     #navBar #navBarBrand {
+//         padding: .5rem 5rem;
+//         color: rgba(255, 255, 255, 0.5);
+//     }
+
+//     #navBar .nav-bar-link {
+//         -webkit-transition: none;
+//         transition: none;
+//         padding: 2rem 1.5rem;
+//         color: rgba(255, 255, 255, 0.5);
+//     }
+
+//     #navBar .nav-bar-link:hover {
+//         color: rgba(255, 255, 255, 0.75);
+//     }
+// }
+.nav-bar {
+    @include flexLayout($justify: space-between, $align: center);
+    font-size: 2.5rem;
+    padding: 1rem 4.5rem;
+    color: white;
+    background-color: #1034A6;
+    // background-color: $color-blue-nice;
+    box-shadow: 0px 5px 10px 0px rgba(0,0,0,.60);
+    position: relative; // to make box-shadow visible
+    &__brand {
+        @include removeLinkDefault($color: currentcolor);
+        color: white;
+    }
+    &__user-group {
+        @include flexLayout($justify: center, $align: center);
+        padding: 1rem;
+        &__username {
+            margin-right: 3rem; 
+        }
+        &__user-cog {
+            cursor: pointer;
+        }
     }
 
-    #navBar #navBarBrand {
-        padding: .5rem 5rem;
-        color: rgba(255, 255, 255, 0.5);
-    }
-
-    #navBar .nav-bar-link {
-        -webkit-transition: none;
-        transition: none;
-        padding: 2rem 1.5rem;
-        color: rgba(255, 255, 255, 0.5);
-    }
-
-    #navBar .nav-bar-link:hover {
-        color: rgba(255, 255, 255, 0.75);
+    &__settings {
+        @include flexLayout($direction: column, $align: center);
+        list-style: none;
+        position: absolute;
+        top: 80%;
+        left: 92%;
+        width: 7%;
+        background-color: white;
+        color: black;
+        padding: 1rem;
+        font-size: 1.4rem;
+        &__item {
+            @include flexLayout($justify: center, $align: center);
+            cursor: pointer;
+            padding: .5rem;
+            transition: all .25s;
+            &--link {
+                color: black;
+                @include removeLinkDefault($color: currentcolor);
+            }
+            &--btn {
+                @include removeButtonDefault();
+                background-color: white;
+            }
+            & span {
+                margin-left: 1rem;
+            }
+            &:hover {
+                background-color: $color-blue-nice;
+                color: white;
+            }
+        }
     }
 }

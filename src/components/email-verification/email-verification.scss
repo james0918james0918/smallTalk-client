@@ -1,0 +1,11 @@
+@import '../../styles/abstract/mixins.scss';
+@import '../../styles/abstract/variables.scss';
+
+.email-verification {
+  height: 100vh;
+  background-color: $color-green;
+  &__text{
+    font-size: 10rem;
+    color: white;
+  }
+}

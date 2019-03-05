@@ -1,0 +1,25 @@
+@import "../../styles/abstract/variables.scss";
+@import "../../styles/abstract/mixins.scss"; 
+
+.spinner-wrapper{
+  @include flexLayout($justify: center);
+  background-color: $color-green;
+}
+
+.spinner{
+  color:white;
+  font-size: 10rem;
+  animation: spin 6s linear infinite;
+}
+
+@keyframes spin  {
+  0% {
+    transform: rotateZ(0deg);
+  }
+  50% {
+    transform: rotateZ(180deg);
+  }
+  100% {
+    transform: rotateZ(360deg);
+  }
+}

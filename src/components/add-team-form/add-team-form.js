@@ -2,22 +2,25 @@ import React from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import { string as yupString, object as yupObject } from 'yup';
 import { Link } from 'react-router-dom';
+import FormData from 'form-data';
 import {
   ADD_TEAM_FORM_FIELDS,
   FILE_TEAM_FROM_FIELD as logo
 } from '../../constants/index';
-import { TeamService } from '../../services/index';
+import { SpinnerContext, TeamService } from '../../services/index';
+import { getUsernameQuery } from '../../helpers/index';
 import './add-team-form.scss';
 
 const teamService = new TeamService();
 
 const initialValues = {
-  title: '',
-  description: ''
+  name: '',
+  description: '',
+  logo: ''
 };
 
 const teamSchema = yupObject({
-  title: yupString()
+  name: yupString()
     .min(2, 'Your team name must contain at least 2 characters')
     .required('Your team name is required'),
   description: yupString()
@@ -78,51 +81,77 @@ const fileInputGroup = (setFieldValue, logoFileObj) => (
   </div>
 );
 
-const AddTeamForm = props => (
-  <div className="addTeamFormContainer">
-    <Formik
-      initialValues={initialValues}
-      validationSchema={teamSchema}
-      onSubmit={(values) => {
-        console.log(props.history);
-        (async () => {
-          const response = await teamService.addTeam(values);
-          if (response.status === 200) {
-            // push means change the url bar directly
-            props.history.push('/');
-          }
-        })();
-      }}
-      render={props => (
-        <Form className="addTeamForm">
-          {normalInputGroups()}
-          {fileInputGroup(props.setFieldValue, props.values.logo)}
-          <div className="addTeamForm__buttonGroup">
-            <button
-              type="submit"
-              disabled={props.isSubmitting}
-              className="addTeamForm__button addTeamForm__button--create"
-            >
-              Create the team!
-            </button>
-            <button
-              type="button"
-              disabled={props.isSubmitting}
-              className="addTeamForm__button addTeamForm__button--backHome"
-            >
-              {!props.isSubmitting ? (
-                <Link to="/" className="addTeamForm__link">
-                  Go back to home
-                </Link>
-              ) : (
-                'Go back to home'
-              )}
-            </button>
-          </div>
-        </Form>
-      )}
-    />
-  </div>
+const AddTeamForm = ({ history, location }) => (
+  <SpinnerContext.Consumer>
+    {/* variable spinnerContext is the context object of the SpinnerContext */}
+    { spinnerContext => (
+      <div className="addTeamFormContainer">
+        <Formik
+          initialValues={initialValues}
+          validationSchema={teamSchema}
+          onSubmit={(values) => {
+            (async () => {
+              try {
+                // open spinner when the team creation starts
+                spinnerContext.toggleSpinner();
+                // construct the multipart stream
+                const formData = new FormData();
+                formData.append('logo', values.logo);
+                // upload real logo
+                const resOfLogoId = await teamService.uploadTeamLogo(formData);
+                // upload the logoId instead of the real logo to TeamController.post('/')
+                const { logo, ...rest } = values;
+                await teamService.createTeam({ ...rest, logoId: resOfLogoId.data });
+                // close spinner
+                spinnerContext.toggleSpinner();
+                history.push({
+                  pathname: '/home',
+                  search: `?username=${getUsernameQuery(location.search)}`
+                });
+              } catch (err) {
+                // close spinner
+                spinnerContext.toggleSpinner();
+                // go back to landing
+                history.push('/landing');
+              }
+            })();
+          }}
+          render={props => (
+            <Form className="addTeamForm" encType="multipart/form-data">
+              {normalInputGroups()}
+              {fileInputGroup(props.setFieldValue, props.values.logo)}
+              <div className="addTeamForm__buttonGroup">
+                <button
+                  type="submit"
+                  disabled={props.isSubmitting}
+                  className="addTeamForm__button addTeamForm__button--create"
+                >
+                  Create the team!
+                </button>
+                <button
+                  type="button"
+                  disabled={props.isSubmitting}
+                  className="addTeamForm__button addTeamForm__button--backHome"
+                >
+                  {!props.isSubmitting ? (
+                    <Link to={{
+                      pathname: '/home',
+                      search: `?username=${getUsernameQuery(location.search)}`
+                    }}
+                      className="addTeamForm__link">
+                      Go back to home
+                    </Link>
+                  ) : (
+                    'Go back to home'
+                  )}
+                </button>
+              </div>
+            </Form>
+          )}
+        />
+      </div>
+    )}
+  </SpinnerContext.Consumer>
 );
 
 export default AddTeamForm;
