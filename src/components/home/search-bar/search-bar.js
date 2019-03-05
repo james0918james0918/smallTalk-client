@@ -3,11 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './search-bar.scss';
 
 const SearchBarTag = (props) => {
-  const wrapper = () => {
-    props.deleteQuery(props.query);
-  };
   return (
-    <button type="button" className="search--bar__tag" onClick={wrapper}>
+    <button type="button" className="search--bar__tag" onClick={props.deleteQuery.bind(null, props.query)}>
       <FontAwesomeIcon icon="times-circle" className="search--bar__tag__icon" />
       <span className="search--bar__tag__text">{props.query}</span>
     </button>
@@ -34,6 +31,7 @@ export default class SearchBar extends Component {
   }
 
   render() {
+    console.log(this.props.queries);
     return (
       <div className="search--bar">
         <button

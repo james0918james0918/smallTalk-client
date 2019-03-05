@@ -1,24 +1,26 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { UserService } from '../../services/index';
-import { navBarSettings } from '../../constants/index';
+import { UserService, AuthService } from '../../services/index';
 import { getUsernameQuery } from '../../helpers/index';
 import './nav-bar.scss';
 
 const userService = new UserService();
+const authService = new AuthService();
 
-const Menu = ({ menuRef }) => (
+const Menu = withRouter(({ history, menuRef }) => (
   // Here, this.menu will be the DOM node of <ul> .... </ul>
   <ul className="nav-bar__settings" ref={menuRef}>
-    { navBarSettings.map((item, index) => (
-      <li className="nav-bar__settings__item" key={index}>
-        <FontAwesomeIcon icon={item.iconName} />
-        <span> {item.functionality} </span>
-      </li>
-    ))}
+    <Link to="/landing" className="nav-bar__settings__item nav-bar__settings__item--link">
+      <FontAwesomeIcon icon="cog" />
+      <span> Settings </span>
+    </Link>
+    <button type="button" onClick={authService.logOut.bind(null, history)} className="nav-bar__settings__item nav-bar__settings__item--btn">
+      <FontAwesomeIcon icon="sign-in-alt" />
+      <span> Log out </span>
+    </button>
   </ul>
-);
+));
 
 
 class NavBar extends Component {

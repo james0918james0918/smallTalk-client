@@ -8,7 +8,9 @@ export class AuthService {
     });
   }
 
-  logOut() {
+  logOut(history) {
+    console.log(history);
     localStorage.removeItem('user');
+    history.push('/landing');
   }
 }

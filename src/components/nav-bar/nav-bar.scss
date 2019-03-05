@@ -73,7 +73,7 @@
     box-shadow: 0px 5px 10px 0px rgba(0,0,0,.60);
     position: relative; // to make box-shadow visible
     &__brand {
-        @include removeLinkDefault();
+        @include removeLinkDefault($color: currentcolor);
         color: white;
     }
     &__user-group {
@@ -88,27 +88,35 @@
     }
 
     &__settings {
-        @include flexLayout($direction: column);
+        @include flexLayout($direction: column, $align: center);
         list-style: none;
         position: absolute;
         top: 80%;
-        left: 89%;
-        width: 10%;
+        left: 92%;
+        width: 7%;
         background-color: white;
         color: black;
-        padding: 1rem 1rem;
-        font-size: 2rem;
+        padding: 1rem;
+        font-size: 1.4rem;
         &__item {
             @include flexLayout($justify: center, $align: center);
             cursor: pointer;
             padding: .5rem;
             transition: all .25s;
-            &:hover {
-                background-color: $color-blue-nice;
-                color: white;
+            &--link {
+                color: black;
+                @include removeLinkDefault($color: currentcolor);
+            }
+            &--btn {
+                @include removeButtonDefault();
+                background-color: white;
             }
             & span {
                 margin-left: 1rem;
+            }
+            &:hover {
+                background-color: $color-blue-nice;
+                color: white;
             }
         }
     }

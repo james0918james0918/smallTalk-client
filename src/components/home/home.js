@@ -36,11 +36,20 @@ class Home extends Component {
     }
   }
 
-  findGroups(queryFromChild = '') {
+  findGroups(...[queryFromChild, fromDeletion]) {
     const queries = [...this.state.queries];
     if (queryFromChild) queries.push(queryFromChild);
+    let groupsToSearch = null;
+    // Perform a full search when deletion occurs
+    if (fromDeletion) groupsToSearch = this.state.groups;
+    else {
+      groupsToSearch = this.state.matchingGroups.length > 0
+        ? this.state.matchingGroups
+        : this.state.groups;
+    }
+    console.log(groupsToSearch);
     // at least contains one of the queries
-    const matchingGroups = this.state.groups
+    const matchingGroups = groupsToSearch
       .filter(cur => queries.some(query => cur.name.includes(query)));
     this.setState({ queries, matchingGroups });
   }
@@ -48,7 +57,7 @@ class Home extends Component {
   deleteQuery(target) {
     // delete the query and refind the matchingGroups
     this.setState({ queries: this.state.queries
-      .filter(query => query !== target) }, this.findGroups);
+      .filter(query => query !== target) }, this.findGroups.bind(null, '', true));
   }
 
   render() {
