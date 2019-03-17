@@ -1,6 +1,5 @@
-@import '../../styles/abstract/mixins.scss';
-@import '../../styles/abstract/variables.scss';
-
+@import '../../../styles/abstract/mixins.scss';
+@import '../../../styles/abstract/variables.scss';
 
 .addTeamFormContainer {
     @include gridLayout($column: 30vw 1fr 30vw, $row:25vh 1fr 25vh);
@@ -55,7 +54,7 @@
                 grid-column: 2/3;
                 color: $color-error;
             }
-        
+
     }
 
         &__link {

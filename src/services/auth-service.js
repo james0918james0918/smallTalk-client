@@ -9,7 +9,6 @@ export class AuthService {
   }
 
   logOut(history) {
-    console.log(history);
     localStorage.removeItem('user');
     history.push('/landing');
   }

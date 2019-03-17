@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Tools from './tools/tools';
 import HomeCards from './home-cards/home-cards';
-import AddTeamForm from '../add-team-form/add-team-form';
+import AddTeamForm from './add-team-form/add-team-form';
 import NavBar from '../nav-bar/nav-bar';
 import { TeamService } from '../../services/team-service';
 import { getUsernameQuery } from '../../helpers/index';
@@ -31,7 +31,6 @@ class Home extends Component {
         .fetchTeams(username);
       this.setState({ groups: res.data, username });
     } catch (err) {
-      console.log(err.message);
       if (err.response) this.props.history.push('/landing');
     }
   }
@@ -47,7 +46,6 @@ class Home extends Component {
         ? this.state.matchingGroups
         : this.state.groups;
     }
-    console.log(groupsToSearch);
     // at least contains one of the queries
     const matchingGroups = groupsToSearch
       .filter(cur => queries.some(query => cur.name.includes(query)));
@@ -76,7 +74,6 @@ class Home extends Component {
   }
 }
 
-// DummyHome
 export default ({ match, location }) => (
   <React.Fragment>
     <NavBar location={location} />

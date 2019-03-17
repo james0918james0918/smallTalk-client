@@ -6,9 +6,9 @@ import FormData from 'form-data';
 import {
   ADD_TEAM_FORM_FIELDS,
   FILE_TEAM_FROM_FIELD as logo
-} from '../../constants/index';
-import { SpinnerContext, TeamService } from '../../services/index';
-import { getUsernameQuery } from '../../helpers/index';
+} from '../../../constants/index';
+import { SpinnerContext, TeamService } from '../../../services/index';
+import { getUsernameQuery } from '../../../helpers/index';
 import './add-team-form.scss';
 
 const teamService = new TeamService();

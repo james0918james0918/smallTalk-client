@@ -31,7 +31,6 @@ export default class SearchBar extends Component {
   }
 
   render() {
-    console.log(this.props.queries);
     return (
       <div className="search--bar">
         <button

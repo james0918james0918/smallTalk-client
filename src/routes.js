@@ -13,6 +13,7 @@ const GuardedRoute = ({ component: Component, ...rest }) => (
 
 const routes = () => (
   <Switch>
+    <Redirect exact from="/" to="landing" />
     <GuardedRoute path="/home" component={DummyHome} />
     <Route exact path="/landing" component={Landing} />
     <Route path="/verification" component={EmailVerification} />
