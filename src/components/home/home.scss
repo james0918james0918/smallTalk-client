@@ -21,23 +21,18 @@
     }
 
     &__card{
-        @include gridLayout($row:25rem min-content);
         background: {
             color: white;
         }
         font-size: 3rem;
         color:black;
-        padding: 2rem;
-        border-radius: 7rem;
         &__img{
             height: 100%;
             width: 100%;
+            object-fit: cover;
             // formatting alt attribute
             color: $color-green-grassgreen;
             text-align: center;
-        }
-        &__name{
-            justify-self: center;
         }
     }
 }

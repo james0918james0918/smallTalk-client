@@ -5,13 +5,13 @@ import { SpinnerContext } from './services/index';
 import { Spinner } from './common/spinner/spinner';
 import addFontAwesomeIcons from './common/font-awesome-icons/font-awesome-icons';
 import './styles/layout/reset.scss'; // reset the font to 10px
+import './styles/theme/theme.scss';
 
 addFontAwesomeIcons();
 
 export default class App extends Component {
   constructor(props) {
     super(props);
-    
     // these two are for spinner context
     this.toggleSpinner = () => {
       this.setState(state => ({

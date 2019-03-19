@@ -1,9 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Button } from 'antd';
 import SearchBar from '../search-bar/search-bar';
 import './tools.scss';
 
-const AddButton = ({ username, url }) => <Link to={{ pathname: `${url}/newTeam`, search: `?username=${username}` }} className="add-button" />;
+const AddButton = ({ username, url }) => (
+  <Button
+    type="primary"
+    ghost
+  >
+  Add a new team
+  </Button>
+);
 
 const Tools = ({ findGroups, queries, deleteQuery, url, username }) => (
   <div className="tools">

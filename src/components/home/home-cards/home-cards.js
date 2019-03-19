@@ -1,14 +1,31 @@
 import React, { Component } from 'react';
+import { Card, Icon } from 'antd';
 
+const { Meta } = Card;
 const HomeCard = ({ name, logoId }) => (
-  <div className="home__card">
-    <img
-      src={`http://localhost:18080/public/team-logos/${logoId}.png`}
-      alt="Your Team logo"
-      className="home__card__img"
+  <Card
+    hoverable
+    cover={(
+      <img
+        src={`http://localhost:18080/public/team-logos/${logoId}.png`}
+        alt="Your Team logo"
+        className="home__card__img"
+      />
+    )}
+    actions={[
+      <Icon type="star" />,
+      <Icon type="setting" />
+    ]}
+    style={{
+      display: 'grid',
+      gridTemplateRows: '20rem',
+    }}
+  >
+    <Meta
+      title={`${name}`}
+      description="this is your team description"
     />
-    <p className="home__card__name"> {name} </p>
-  </div>
+  </Card>
 );
 
 export default class HomeCards extends Component {

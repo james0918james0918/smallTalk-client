@@ -34,13 +34,15 @@ class NavBar extends Component {
     this.closeMenu = this.closeMenu.bind(this);
   }
 
-  async componentDidMount() {
-    try {
-      const res = await userService.get(getUsernameQuery(this.props.location.search));
-      this.setState({ username: res.data });
-    } catch (err) {
-      this.props.history.push('/landing');
-    }
+  componentDidMount() {
+    (async () => {
+      try {
+        const res = await userService.get(getUsernameQuery(this.props.location.search));
+        this.setState({ username: res.data });
+      } catch (err) {
+        this.props.history.push('/landing');
+      }
+    })();
   }
 
   showMenu() {
