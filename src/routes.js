@@ -11,7 +11,7 @@ const GuardedRoute = ({ component: Component, ...rest }) => (
       : <Redirect to={{ pathname: '/landing', state: { from: props.location } }} />)} />
 );
 
-const routes = () => (
+const Routes = () => (
   <Switch>
     <Redirect exact from="/" to="landing" />
     <GuardedRoute path="/home" component={DummyHome} />
@@ -21,4 +21,4 @@ const routes = () => (
   </Switch>
 );
 
-export default routes;
+export default Routes;

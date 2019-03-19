@@ -79,7 +79,7 @@ export default ({ match, location }) => (
     <NavBar location={location} />
     <Switch>
       <Route exact path={`${match.url}/newTeam`} component={AddTeamForm} />
-      <Route component={Home} />
+      <Route path="/home/:id" component={Home} />
     </Switch>
   </React.Fragment>
 );
