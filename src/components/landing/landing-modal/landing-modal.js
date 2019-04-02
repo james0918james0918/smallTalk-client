@@ -131,13 +131,6 @@ class LandingModal extends Component {
           // e
         }
       })();
-
-      // authService
-      //   .logIn(this.state.formData.username, this.state.formData.password)
-      //   .then(() => {
-      //     this.setState({ isLoading: false });
-      //     this.props.history.push('/');
-      //   });
     } else {
       // send the request to the server to ask the server to send the email
       (async (userInfo) => {

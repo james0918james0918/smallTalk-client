@@ -64,8 +64,7 @@ class Home extends Component {
         <Tools findGroups={this.findGroups}
           queries={this.state.queries}
           deleteQuery={this.deleteQuery}
-          url={this.props.match.url}
-          username={this.state.username} />
+        />
         <HomeCards groups={this.state.groups}
           queries={this.state.queries}
           matchingGroups={this.state.matchingGroups} />
