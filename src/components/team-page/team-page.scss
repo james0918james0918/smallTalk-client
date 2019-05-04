@@ -1,0 +1,7 @@
+@import '../../styles/abstract/mixins.scss';
+@import '../../styles/abstract/variables.scss';
+
+.team-page {
+  @include gridLayout($column: minmax(8rem, 1fr) 4fr );
+  height: 100vh;
+}

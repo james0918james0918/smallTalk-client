@@ -4,13 +4,12 @@ import { Button } from 'antd';
 import SearchBar from '../search-bar/search-bar';
 import './tools.scss';
 
-const AddButton = ({ history, match, location }) => (
+const AddButton = ({ history, match }) => (
   <Button
     type="primary"
     ghost
     onClick={() => {
-      console.log(match.url);
-      history.push(`${match.url}/newTeam`, { id: location.state.id });
+      history.push(`${match.url}/newTeam`);
     }}
   >
   Add a new team

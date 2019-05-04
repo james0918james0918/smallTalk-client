@@ -29,6 +29,27 @@
     cursor: pointer;
 }
 
+@mixin absPositioningButton($bg-color, $top: 85%, $left: 90%) {
+    background-color: $bg-color;
+    position: absolute;
+    border-radius: 50%;
+    top: $top;
+    left: $left;
+    padding: 1.5rem;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    z-index: 2;
+    cursor: pointer;
+    transition: all .25s;
+
+    &:hover {
+      transform: translateY(-3px);
+    }
+
+    &:active {
+      transform: translateY(0px);
+    }
+}
+
 @mixin removeLinkDefault($color) {
     &:hover, &:focus, &:active {
         text-decoration: none;

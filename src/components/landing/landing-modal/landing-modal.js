@@ -126,7 +126,7 @@ class LandingModal extends Component {
           // set the token
           localStorage.setItem('user', JSON.stringify(res.data.user));
           this.setState({ isLoading: false });
-          this.props.history.push(`/home/${res.data.id}`, { id: res.data.id });
+          this.props.history.push('/home');
         } catch (e) {
           // e
         }

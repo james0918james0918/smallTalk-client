@@ -5,15 +5,12 @@ export class TeamService {
     return teams.post('', teamData);
   }
 
-  fetchTeams(username) {
-    return teams.get('', {
-      params: {
-        username
-      }
-    });
+  fetchTeams() {
+    return teams.get('');
   }
 
   uploadTeamLogo(fileStream) {
+    // Append the user id on the header to pass the authorizing step
     return teams.post('/team-logos', fileStream);
   }
 }

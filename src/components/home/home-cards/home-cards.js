@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { Card, Icon } from 'antd';
 
 const { Meta } = Card;
-const HomeCard = ({ name, logoId }) => (
+const HomeCard = ({ id, name, description, logoId, history, match }) => (
   <Card
-    hoverable
     cover={(
       <img
         src={`http://localhost:18080/public/team-logos/${logoId}.png`}
@@ -14,7 +14,16 @@ const HomeCard = ({ name, logoId }) => (
     )}
     actions={[
       <Icon type="star" />,
-      <Icon type="setting" />
+      <Icon type="setting" />,
+      <Icon
+        type="enter"
+        onClick={() => {
+          history.push(`${match.url}/${id}`, {
+            // Pass the id of the team for later convenience
+            teamId: id
+          });
+        }}
+      />
     ]}
     style={{
       display: 'grid',
@@ -22,11 +31,13 @@ const HomeCard = ({ name, logoId }) => (
     }}
   >
     <Meta
-      title={`${name}`}
-      description="this is your team description"
+      title={name}
+      description={description}
     />
   </Card>
 );
+
+const HomeCardWithRouter = withRouter(HomeCard);
 
 export default class HomeCards extends Component {
   constructor(props) {
@@ -37,13 +48,24 @@ export default class HomeCards extends Component {
 
   createMatchingCards() {
     return this.props.matchingGroups.map((item, index) => (
-      <HomeCard name={item.name} logoId={item.logoId} key={index} />
+      <HomeCardWithRouter
+        name={item.name}
+        description={item.description}
+        logoId={item.logoId}
+        key={index}
+      />
     ));
   }
 
   createCards() {
     return this.props.groups.map((item, index) => (
-      <HomeCard name={item.name} logoId={item.logoId} key={index} />
+      <HomeCardWithRouter
+        id={item.id}
+        name={item.name}
+        description={item.description}
+        logoId={item.logoId}
+        key={index}
+      />
     ));
   }
 
