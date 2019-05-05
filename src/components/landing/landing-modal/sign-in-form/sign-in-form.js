@@ -26,7 +26,7 @@ class SignInForm extends Component {
     this.changeFieldValid = this.changeFieldValid.bind(this);
   }
 
-  changeFieldValid(e) { 
+  changeFieldValid(e) {
     const { formValidBits } = this.state;
     // username and password should not be empty
     if (e.target.value.length > 0) {

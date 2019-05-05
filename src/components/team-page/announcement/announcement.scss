@@ -1,0 +1,16 @@
+@import '../../../styles/abstract/variables.scss';
+@import '../../../styles/abstract/mixins.scss';
+
+.announcement {
+  position: relative;
+  &__tools {
+    @include absPositioningButton($color-green-dark);
+  }
+
+  &__list {
+    // In order to make overflow work, height property should be set to a value
+    height: 100vh;
+    // Create a scroll bar for the items which cause overflow
+    overflow: scroll;
+  }
+}

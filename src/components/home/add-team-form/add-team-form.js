@@ -1,14 +1,13 @@
 import React from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import { string as yupString, object as yupObject } from 'yup';
-import { Link } from 'react-router-dom';
+import { Input, Button } from 'antd';
 import FormData from 'form-data';
 import {
   ADD_TEAM_FORM_FIELDS,
   FILE_TEAM_FROM_FIELD as logo
 } from '../../../constants/index';
 import { SpinnerContext, TeamService } from '../../../services/index';
-import { getUsernameQuery } from '../../../helpers/index';
 import './add-team-form.scss';
 
 const teamService = new TeamService();
@@ -41,12 +40,14 @@ const normalInputGroups = () =>
       </label>
       <Field
         name={item.field}
-        type={item.type}
-        id={item.field}
-        placeholder={item.placeholder}
-        className={`addTeamForm__inputGroup__input addTeamForm__inputGroup__input--${
-          item.field
-        }`}
+        // field contains the onChange, onBlur methods which are supposed to be passed to input
+        render={({ field, form: { isSubmitting } }) => (
+          <Input
+            {...field}
+            disabled={isSubmitting}
+            placeholder={item.placeholder}
+          />
+        )}
       />
       <ErrorMessage name={item.field}>
         {msg => <div className="addTeamForm__inputGroup__error">{msg}</div>}
@@ -81,7 +82,7 @@ const fileInputGroup = (setFieldValue, logoFileObj) => (
   </div>
 );
 
-const AddTeamForm = ({ history, location }) => (
+const AddTeamForm = ({ history }) => (
   <SpinnerContext.Consumer>
     {/* variable spinnerContext is the context object of the SpinnerContext */}
     { spinnerContext => (
@@ -93,7 +94,7 @@ const AddTeamForm = ({ history, location }) => (
             (async () => {
               try {
                 // open spinner when the team creation starts
-                spinnerContext.toggleSpinner();
+                // spinnerContext.toggleSpinner();
                 // construct the multipart stream
                 const formData = new FormData();
                 formData.append('logo', values.logo);
@@ -101,16 +102,16 @@ const AddTeamForm = ({ history, location }) => (
                 const resOfLogoId = await teamService.uploadTeamLogo(formData);
                 // upload the logoId instead of the real logo to TeamController.post('/')
                 const { logo, ...rest } = values;
-                await teamService.createTeam({ ...rest, logoId: resOfLogoId.data });
-                // close spinner
-                spinnerContext.toggleSpinner();
-                history.push({
-                  pathname: '/home',
-                  search: `?username=${getUsernameQuery(location.search)}`
+                await teamService.createTeam({
+                  ...rest,
+                  logoId: resOfLogoId.data
                 });
+                // close spinner
+                // spinnerContext.toggleSpinner();
+                history.push('/home');
               } catch (err) {
                 // close spinner
-                spinnerContext.toggleSpinner();
+                // spinnerContext.toggleSpinner();
                 // go back to landing
                 history.push('/landing');
               }
@@ -121,30 +122,27 @@ const AddTeamForm = ({ history, location }) => (
               {normalInputGroups()}
               {fileInputGroup(props.setFieldValue, props.values.logo)}
               <div className="addTeamForm__buttonGroup">
-                <button
-                  type="submit"
-                  disabled={props.isSubmitting}
-                  className="addTeamForm__button addTeamForm__button--create"
+                <Button
+                  size="large"
+                  type="primary"
+                  loading={props.isSubmitting}
+                  // Formik bound onSubmit method to the button with type submit automatically
+                  htmlType="submit"
+                  ghost
                 >
                   Create the team!
-                </button>
-                <button
-                  type="button"
+                </Button>
+                <Button
+                  size="large"
+                  type="danger"
                   disabled={props.isSubmitting}
-                  className="addTeamForm__button addTeamForm__button--backHome"
+                  onClick={() => {
+                    history.push('/home');
+                  }}
+                  ghost
                 >
-                  {!props.isSubmitting ? (
-                    <Link to={{
-                      pathname: '/home',
-                      search: `?username=${getUsernameQuery(location.search)}`
-                    }}
-                      className="addTeamForm__link">
-                      Go back to home
-                    </Link>
-                  ) : (
-                    'Go back to home'
-                  )}
-                </button>
+                  Back to home
+                </Button>
               </div>
             </Form>
           )}

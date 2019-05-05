@@ -126,18 +126,11 @@ class LandingModal extends Component {
           // set the token
           localStorage.setItem('user', JSON.stringify(res.data.user));
           this.setState({ isLoading: false });
-          this.props.history.push(`/home/${res.data.id}`, { id: res.data.id });
+          this.props.history.push('/home');
         } catch (e) {
           // e
         }
       })();
-
-      // authService
-      //   .logIn(this.state.formData.username, this.state.formData.password)
-      //   .then(() => {
-      //     this.setState({ isLoading: false });
-      //     this.props.history.push('/');
-      //   });
     } else {
       // send the request to the server to ask the server to send the email
       (async (userInfo) => {

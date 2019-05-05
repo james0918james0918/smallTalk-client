@@ -4,8 +4,8 @@ import Tools from './tools/tools';
 import HomeCards from './home-cards/home-cards';
 import AddTeamForm from './add-team-form/add-team-form';
 import NavBar from '../nav-bar/nav-bar';
+import TeamPage from '../team-page/team-page';
 import { TeamService } from '../../services/team-service';
-import { getUsernameQuery } from '../../helpers/index';
 import './home.scss';
 
 const teamService = new TeamService();
@@ -14,7 +14,6 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
       groups: [],
       queries: [],
       matchingGroups: [],
@@ -25,11 +24,9 @@ class Home extends Component {
 
   async componentDidMount() {
     try {
-      const username = getUsernameQuery(this.props.location.search);
       // parse the query string
-      const res = await teamService
-        .fetchTeams(username);
-      this.setState({ groups: res.data, username });
+      const res = await teamService.fetchTeams();
+      this.setState({ groups: res.data });
     } catch (err) {
       if (err.response) this.props.history.push('/landing');
     }
@@ -60,26 +57,29 @@ class Home extends Component {
 
   render() {
     return (
-      <section className="home">
-        <Tools findGroups={this.findGroups}
-          queries={this.state.queries}
-          deleteQuery={this.deleteQuery}
-          url={this.props.match.url}
-          username={this.state.username} />
-        <HomeCards groups={this.state.groups}
-          queries={this.state.queries}
-          matchingGroups={this.state.matchingGroups} />
-      </section>
+      <React.Fragment>
+        <NavBar />
+        <section className="home">
+          <Tools findGroups={this.findGroups}
+            queries={this.state.queries}
+            deleteQuery={this.deleteQuery}
+          />
+          <HomeCards groups={this.state.groups}
+            queries={this.state.queries}
+            matchingGroups={this.state.matchingGroups} />
+        </section>
+      </React.Fragment>
     );
   }
 }
 
-export default ({ match, location }) => (
+// DummyHome
+export default ({ match }) => (
   <React.Fragment>
-    <NavBar location={location} />
     <Switch>
       <Route exact path={`${match.url}/newTeam`} component={AddTeamForm} />
-      <Route path="/home/:id" component={Home} />
+      <Route exact path="/home" component={Home} />
+      <Route path="/home/:teamId" component={TeamPage} />
     </Switch>
   </React.Fragment>
 );

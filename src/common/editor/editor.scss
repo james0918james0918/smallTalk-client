@@ -1,0 +1,13 @@
+@import "../../styles/abstract/variables.scss";
+@import "../../styles/abstract/mixins.scss"; 
+
+.editor {
+  position: relative;
+  // For textarea to stretch out the whole page
+  &__textarea {
+    height: 100%;
+  }
+  &__submit-btn {
+    @include absPositioningButton($color-green-dark);
+  }
+}

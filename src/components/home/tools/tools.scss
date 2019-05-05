@@ -9,32 +9,35 @@
     color:white;
 }
 
-.add-button {
-    @include removeButtonDefault();
-    @include flexLayout($direction: column,$justify:center,$align:center);
-    height: 8rem;
-    width: 8rem;
-    padding: 3rem;
-    border-radius: 50%;
-    color:white;
-    background-color:  $color-orange-light;
-    transition: all .4s;
-    &:hover{
-        color: $color-orange-light;
-        background-color: white;
-    }
+  
+  
 
-    // goes down when pushed
-    &:active{
-        transform: translateY(2px);
-    }
+// .add-button {
+//     @include removeButtonDefault();
+//     @include flexLayout($direction: column,$justify:center,$align:center);
+//     height: 8rem;
+//     width: 8rem;
+//     padding: 3rem;
+//     border-radius: 50%;
+//     color:white;
+//     background-color:  $color-orange-light;
+//     transition: all .4s;
+//     &:hover{
+//         color: $color-orange-light;
+//         background-color: white;
+//     }
 
-    &::before{
-        @include horizontalLine(3px,4.5rem,currentcolor,rotateZ(90deg));
-        transition: all .4s;
-    }
-    &::after{
-        @include horizontalLine(3px,4.5rem,currentcolor,rotateZ(0deg) translateY(-2px));
-        transition: all .4s;
-    }
-}
+//     // goes down when pushed
+//     &:active{
+//         transform: translateY(2px);
+//     }
+
+//     &::before{
+//         @include horizontalLine(3px,4.5rem,currentcolor,rotateZ(90deg));
+//         transition: all .4s;
+//     }
+//     &::after{
+//         @include horizontalLine(3px,4.5rem,currentcolor,rotateZ(0deg) translateY(-2px));
+//         transition: all .4s;
+//     }
+// }

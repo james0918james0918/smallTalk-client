@@ -1,21 +1,24 @@
 import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Tag } from 'antd';
 import './search-bar.scss';
 
-const SearchBarTag = (props) => {
-  return (
-    <button type="button" className="search--bar__tag" onClick={props.deleteQuery.bind(null, props.query)}>
-      <FontAwesomeIcon icon="times-circle" className="search--bar__tag__icon" />
-      <span className="search--bar__tag__text">{props.query}</span>
-    </button>
-  );
-};
+const SearchBarTag = props => (
+  <Tag
+    closable
+    onClose={props.deleteQuery.bind(null, props.query)}
+    color="volcano"
+    visible
+  >
+    { props.query }
+  </Tag>
+);
 
 export default class SearchBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      query: null
+      query: null,
     };
     this.submit = this.submit.bind(this);
     this.handleQueryOnChange = this.handleQueryOnChange.bind(this);

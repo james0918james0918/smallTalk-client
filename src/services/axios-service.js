@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-const servicesNames = ['users', 'teams', 'authentication'];
+const servicesNames = ['users', 'teams', 'authentication', 'posts'];
 
-const [users, teams, authentication] = servicesNames.map((name) => {
+const [users, teams, authentication, posts] = servicesNames.map((name) => {
   const service = axios.create({
     baseURL: `http://127.0.0.1:18080/${name}`,
     timeout: 30 * 1000
@@ -16,4 +16,4 @@ const [users, teams, authentication] = servicesNames.map((name) => {
   return service;
 });
 
-export { users, teams, authentication };
+export { users, teams, authentication, posts };
