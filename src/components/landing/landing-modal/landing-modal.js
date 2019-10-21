@@ -121,6 +121,7 @@ class LandingModal extends Component {
       (async () => {
         try {
           const { username, password } = this.state.signinFormData;
+          console.log('username', username);
           const res = await authService
             .logIn(username, password);
           // set the token
@@ -128,7 +129,7 @@ class LandingModal extends Component {
           this.setState({ isLoading: false });
           this.props.history.push('/home');
         } catch (e) {
-          // e
+          console.log(e);
         }
       })();
     } else {

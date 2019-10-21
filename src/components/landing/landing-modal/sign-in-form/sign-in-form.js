@@ -16,7 +16,7 @@ class SignInForm extends Component {
     this.state = {
       username: this.props.formData.username,
       password: this.props.formData.password,
-      formValidBits:{
+      formValidBits: {
         username: false,
         password: false,
       }

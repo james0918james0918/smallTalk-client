@@ -7,10 +7,13 @@ import {
   ADD_TEAM_FORM_FIELDS,
   FILE_TEAM_FROM_FIELD as logo
 } from '../../../constants/index';
-import { SpinnerContext, TeamService } from '../../../services/index';
-import './add-team-form.scss';
+import { SpinnerContext } from '../../../services/index';
+import {
+  createTeam,
+  uploadTeamLogo
+} from '../../../services/team-service';
 
-const teamService = new TeamService();
+import './add-team-form.scss';
 
 const initialValues = {
   name: '',
@@ -99,10 +102,10 @@ const AddTeamForm = ({ history }) => (
                 const formData = new FormData();
                 formData.append('logo', values.logo);
                 // upload real logo
-                const resOfLogoId = await teamService.uploadTeamLogo(formData);
+                const resOfLogoId = await uploadTeamLogo(formData);
                 // upload the logoId instead of the real logo to TeamController.post('/')
                 const { logo, ...rest } = values;
-                await teamService.createTeam({
+                await createTeam({
                   ...rest,
                   logoId: resOfLogoId.data
                 });

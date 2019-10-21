@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Tag } from 'antd';
 import './search-bar.scss';
@@ -6,7 +6,7 @@ import './search-bar.scss';
 const SearchBarTag = props => (
   <Tag
     closable
-    onClose={props.deleteQuery.bind(null, props.query)}
+    onClose={props.onClose}
     color="volcano"
     visible
   >
@@ -14,47 +14,42 @@ const SearchBarTag = props => (
   </Tag>
 );
 
-export default class SearchBar extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      query: null,
-    };
-    this.submit = this.submit.bind(this);
-    this.handleQueryOnChange = this.handleQueryOnChange.bind(this);
-  }
+const SearchBar = ({ queries, setQueries }) => {
+  // Access input element
+  const inputEl = React.useRef(null);
+  // Factory function for individual tag to delete its only query
+  const deleteQueryFactory = targetQ => () => {
+    setQueries(queries.filter(query => query !== targetQ));
+  };
+  const testQueries = () => {
+    const query = inputEl.current.value;
+    if (query && !queries.includes(query)) {
+      setQueries([...queries, query]);
+    }
+  };
 
-  submit() {
-    // find matching groups
-    this.props.findGroups(this.state.query);
-  }
+  return (
+    <div className="search--bar">
+      <button
+        className="search--bar__btn"
+        type="button"
+        onClick={testQueries}
+      >
+        <FontAwesomeIcon icon="search" />
+      </button>
+      <input
+        className="search--bar__input"
+        name="query"
+        type="text"
+        placeholder="Search for your group"
+        ref={inputEl}
+      />
+      {
+        queries.map((item, index) =>
+          <SearchBarTag query={item} key={index} onClose={deleteQueryFactory(item)} />)
+      }
+    </div>
+  );
+};
 
-  handleQueryOnChange(e) {
-    this.setState({ query: e.target.value });
-  }
-
-  render() {
-    return (
-      <div className="search--bar">
-        <button
-          className="search--bar__btn"
-          type="button"
-          onClick={this.submit}
-        >
-          <FontAwesomeIcon icon="search" />
-        </button>
-        <input
-          className="search--bar__input"
-          name="query"
-          type="text"
-          placeholder="Search for your group"
-          onChange={this.handleQueryOnChange}
-        />
-        {
-          this.props.queries.map((item, index) =>
-            <SearchBarTag query={item} deleteQuery={this.props.deleteQuery} key={index} />)
-        }
-      </div>
-    );
-  }
-}
+export default SearchBar;

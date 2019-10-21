@@ -9,7 +9,7 @@ const AddButton = ({ history, match }) => (
     type="primary"
     ghost
     onClick={() => {
-      history.push(`${match.url}/newTeam`);
+      history.push(`${match.url}/new-team`);
     }}
   >
   Add a new team
@@ -18,11 +18,12 @@ const AddButton = ({ history, match }) => (
 
 const AddButtonWithRouter = withRouter(AddButton);
 
-const Tools = ({ findGroups, queries, deleteQuery }) => (
+const Tools = ({ queries, setQueries }) => (
   <div className="tools">
-    <SearchBar findGroups={findGroups}
-               queries={queries}
-               deleteQuery={deleteQuery} />
+    <SearchBar
+      queries={queries}
+      setQueries={setQueries}
+    />
     <AddButtonWithRouter />
   </div>
 );

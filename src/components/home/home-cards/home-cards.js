@@ -42,23 +42,11 @@ const HomeCardWithRouter = withRouter(HomeCard);
 export default class HomeCards extends Component {
   constructor(props) {
     super(props);
-    this.createCards = this.createCards.bind(this);
     this.createMatchingCards = this.createMatchingCards.bind(this);
   }
 
   createMatchingCards() {
     return this.props.matchingGroups.map((item, index) => (
-      <HomeCardWithRouter
-        name={item.name}
-        description={item.description}
-        logoId={item.logoId}
-        key={index}
-      />
-    ));
-  }
-
-  createCards() {
-    return this.props.groups.map((item, index) => (
       <HomeCardWithRouter
         id={item.id}
         name={item.name}
@@ -72,9 +60,7 @@ export default class HomeCards extends Component {
   render() {
     return (
       <div className="home__cards">
-        {this.props.matchingGroups.length > 0
-          ? this.createMatchingCards()
-          : this.createCards()}
+        { this.createMatchingCards() }
       </div>
     );
   }
